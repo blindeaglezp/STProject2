@@ -25,35 +25,35 @@
 					<ul class="nav nav-list">
 						<li>
 							<a href="<%=request.getContextPath()%>/servlet/ProvinceServlet?type=toIndex">
-								<i class="icon-dashboard"></i>
+								<img src="<%=request.getContextPath()%>/assets/css/images/iconfont-home.png"  width="18" height="15"/>
 								<span class="menu-text"> 首页 </span>
 							</a>
 						</li>
 
 						<li>
 							<a href="<%=request.getContextPath()%>/servlet/ProvinceServlet?type=toUserManage">
-								<i class="icon-text-width"></i>
+								<img src="<%=request.getContextPath()%>/assets/css/images/iconfont-gerenzhongxin.png"  width="18" height="15"/>
 								<span class="menu-text"> 用户管理 </span>
 							</a>
 						</li>
 
 						<li>
 							<a href="<%=request.getContextPath()%>/servlet/ProvinceServlet?type=toCityManage" class="dropdown-toggle">
-								<i class="icon-desktop"></i>
+								<img src="<%=request.getContextPath()%>/assets/css/images/iconfont-category.png"  width="20" height="15"/>
 								<span class="menu-text"> 市区管理 </span>
 							</a>
 						</li>
 
 						<li>
 							<a href="<%=request.getContextPath()%>/servlet/ProvinceServlet?type=toSubjectManage" class="dropdown-toggle">
-								<i class="icon-list"></i>
+								<img src="<%=request.getContextPath()%>/assets/css/images/iconfont-category.png"  width="20" height="15"/>
 								<span class="menu-text"> 科目管理 </span>
 							</a>
 						</li>
 
 						<li>
 							<a href="<%=request.getContextPath()%>/servlet/ProvinceServlet?type=toProjectManage" class="dropdown-toggle">
-								<i class="icon-edit"></i>
+								<img src="<%=request.getContextPath()%>/assets/css/images/iconfont-table.png"  width="20" height="15"/>
 								<span class="menu-text"> 项目管理 </span>
 							</a>
 						</li>

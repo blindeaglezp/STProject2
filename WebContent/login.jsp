@@ -74,14 +74,12 @@
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
 															<input type="text" class="form-control"  name="userName" placeholder="用户名" />
-															<i class="icon-user"></i>
 														</span>
 													</label>
 
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
 															<input type="password" class="form-control" placeholder="密码" name="password" />
-															<i class="icon-lock"></i>
 														</span>
 													</label>
 

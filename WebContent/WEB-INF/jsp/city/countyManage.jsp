@@ -25,35 +25,35 @@
 					<ul class="nav nav-list">
 						<li>
 							<a href="<%=request.getContextPath()%>/servlet/CityServlet?type=toIndex">
-								<i class="icon-dashboard"></i>
+								<img src="<%=request.getContextPath()%>/assets/css/images/iconfont-home.png"  width="18" height="15"/>
 								<span class="menu-text"> 首页 </span>
 							</a>
 						</li>
 
 						<li>
 							<a href="<%=request.getContextPath()%>/servlet/CityServlet?type=toUserManage">
-								<i class="icon-text-width"></i>
+								<img src="<%=request.getContextPath()%>/assets/css/images/iconfont-gerenzhongxin.png"  width="18" height="15"/>
 								<span class="menu-text"> 用户管理 </span>
 							</a>
 						</li>
 
 						<li>
 							<a href="<%=request.getContextPath()%>/servlet/CityServlet?type=toCountyManage">
-								<i class="icon-desktop"></i>
+								<img src="<%=request.getContextPath()%>/assets/css/images/iconfont-category.png"  width="18" height="15"/>
 								<span class="menu-text"> 县管理  </span>
 							</a>
 						</li>
 
 						<li>
 							<a href="<%=request.getContextPath()%>/servlet/CityServlet?type=toCityProjectManage" >
-								<i class="icon-list"></i>
+								<img src="<%=request.getContextPath()%>/assets/css/images/iconfont-category.png"  width="18" height="15"/>
 								<span class="menu-text"> 市级项目管理 </span>
 							</a>
 						</li>
 
 						<li>
 							<a href="<%=request.getContextPath()%>/servlet/CityServlet?type=toCountyProjectManage">
-								<i class="icon-edit"></i>
+								<img src="<%=request.getContextPath()%>/assets/css/images/iconfont-table.png"  width="18" height="15"/>
 								<span class="menu-text"> 县级项目查看 </span>
 							</a>
 						</li>
