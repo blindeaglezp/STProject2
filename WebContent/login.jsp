@@ -6,56 +6,130 @@
 <%@ page pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <title>登录</title>
     <meta name="Keywords" content="">
     <meta name="description" content="">
-    <style type="text/css">
-        *{margin:0;padding:0;}
-        a{text-decoration:none;color:#111;}
-        li{list-style:none;}
-        body{background:#FFF;font-size:14px;font-family:"微软雅黑";color:#666;}
-        .container{width:1080px;margin:0 auto;}
-        .login{width:275px;height:125px;border:1px solid #666;padding:15px;}
-        .login table tr{height:25px;}
-        .login table tr td.title{text-align:right;font-size:16px;}
-        .login table tr td input{width:200px;height:25px;margin:5px 0;}
-        .login table tr td button{width:269px;height:30px;border:none;background:blue;color:#FFF;
-        	margin:5px 0;border-radius:3px;font-size:16px;}
-    </style>
-</head>
-<body onload="setLoginDivCenter();">
-    <div class="container">
-    	<div class="login">
-    		<form action="<%=request.getContextPath() %>/servlet/LoginServlet?type=checkUser" method="post">
-	    		<table>
-	    			<tr>
-	    				<td class="title">用户名：</td>
-	    				<td><input type="text" name="userName"/></td>
-	    			</tr>
-	    			<tr>
-	    				<td class="title">密码：</td>
-	    				<td><input type="password" name="password"/></td>
-	    			</tr>
-	    			<tr>
-	    				<td colspan="2">
-	    					<button type="submit" class="toLogin">登 录</button>
-	    				</td>
-	    			</tr>
-	    		</table>
-    		</form>
-    	</div>
-    </div>
-    
-    <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/js/blindeagle.js"></script>
-    <script type="text/javascript">
-    	function setLoginDivCenter() {
-    		be_setDivCenter($(".login"));
-    	}
-    </script>
-    
+
+		<!-- basic styles -->
+
+		<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+
+		<!--[if IE 7]>
+		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+		<![endif]-->
+
+		<!-- page specific plugin styles -->
+
+		<!-- fonts -->
+
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+
+		<!-- ace styles -->
+
+		<link rel="stylesheet" href="assets/css/ace.min.css" />
+		<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+
+		<!--[if lte IE 8]>
+		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+		<![endif]-->
+
+		<!-- inline styles related to this page -->
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+		<!--[if lt IE 9]>
+		<script src="assets/js/html5shiv.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+		<![endif]-->
+	</head>
+
+	<body class="login-layout">
+		<div class="main-container">
+			<div class="main-content">
+				<div class="row">
+					<div class="col-sm-10 col-sm-offset-1">
+						<div class="login-container">
+							<div class="center">
+							<div class="space-6"></div>												
+							<div class="space-6"></div>
+								<h1>
+									<span class="white">山西省财政厅</span>
+								</h1>
+								<h4 class="blue">&copy; Company Name</h4>
+								<div class="space-6"></div>
+								<div class="space-6"></div>
+							</div>
+							<div class="space-6"></div>
+							<div class="position-relative">
+								<div id="login-box" class="login-box visible widget-box no-border">
+									<div class="widget-body">
+										<div class="widget-main">
+											<h4 class="header blue lighter bigger">
+											</h4>
+											<div class="space-6"></div>
+											<form action="<%=request.getContextPath() %>/servlet/LoginServlet?type=checkUser" method="post">
+												<fieldset>
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="text" class="form-control"  name="userName" placeholder="Username" />
+															<i class="icon-user"></i>
+														</span>
+													</label>
+
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="password" class="form-control" placeholder="Password" name="password" />
+															<i class="icon-lock"></i>
+														</span>
+													</label>
+
+													<div class="space"></div>
+
+													<div class="clearfix">
+														<button type="submit" class="btn btn-danger btn-block">
+															<i class="icon-key"></i>
+															登录
+														</button>
+													</div>
+
+													<div class="space-4"></div>
+												</fieldset>
+											</form>
+										</div><!-- /widget-main -->
+									</div><!-- /widget-body -->
+								</div><!-- /login-box -->
+							</div><!-- /position-relative -->
+						</div>
+					</div><!-- /.col -->
+				</div><!-- /.row -->
+			</div>
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+
+		<!--[if !IE]> -->
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+		<!--[if IE]>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<![endif]-->
+
+		<!--[if !IE]> -->
+
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+		</script>
+		<!--[if IE]>
+<script type="text/javascript">
+ window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+
+		<script type="text/javascript">
+			if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+		</script>
 </body>
 </html>
