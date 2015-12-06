@@ -87,10 +87,8 @@
 													</label>
 
 													<div class="space"></div>
-
 													<div class="clearfix">
 														<button type="submit" class="btn btn-danger btn-block">
-															<i class="icon-key"></i>
 															登录
 														</button>
 													</div>

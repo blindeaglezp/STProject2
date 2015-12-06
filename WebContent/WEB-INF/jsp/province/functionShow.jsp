@@ -18,7 +18,7 @@
 <body onload="province_initLeft();">
     <div class="container">
         <jsp:include page="/public/top.jsp"></jsp:include>
-        <jsp:include page="/public/left.jsp"></jsp:include>
+       <%--  <jsp:include page="/public/left.jsp"></jsp:include> --%>
         <div class="right">
         	<ul class="ul_function">
         		<li><a href="<%=request.getContextPath()%>/servlet/ProvinceServlet?type=toUserManage">用户管理</a></li>
