@@ -23,7 +23,7 @@
         	<ul class="ul_function">
         		<li><a href="<%=request.getContextPath()%>/servlet/CityServlet?type=toUserManage">用户管理</a></li>
         		<li><a href="<%=request.getContextPath()%>/servlet/CityServlet?type=toCountyManage">县管理</a></li>
-        		<li><a href="<%=request.getContextPath()%>/servlet/CityServlet?type=toCountyProjectManage">县级项目管理</a></li>
+        		<li><a href="<%=request.getContextPath()%>/servlet/CityServlet?type=toCountyProjectManage">县级项目查看</a></li>
         		<li><a href="<%=request.getContextPath()%>/servlet/CityServlet?type=toCityProjectManage">市级项目管理</a></li>
         	</ul>
         </div>

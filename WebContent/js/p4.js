@@ -4,101 +4,136 @@
  * date:2015.11.29
  */
 
-// 根据市查询省级项目表
-function queryProjectByCityName() {
+$(".provinceRfc").bind("input propertychange", function() {
+	var provinceRfc = $(this).val();
+	var data = {"provinceRfc":provinceRfc};
+	$.ajax({
+		type:"post",
+		url:"/STProject2/servlet/ProvinceServlet?type=queryRfcByRfc",
+		dataType:"json",
+		data:data,
+		success:function(data){
+			var $ul = $(".projectRight .rfcItem");
+			$ul.find("li").remove();
+			$(data).each(function() {
+				$ul.append("<li>"+this+"</li>");
+			});
+		}
+	});
+});
+
+// 省级统计项目
+function projectTotal() {
+	var budgetTotal = 0, costTotal = 0;
+	$(".tab_provinceProject .tab_content .countyBudget").each(function() {
+		budgetTotal += parseInt($(this).html());
+	});
+	$(".tab_provinceProject .tab_content .countyCost").each(function() {
+		costTotal += parseInt($(this).html());
+	});
+	$(".tab_provinceProject .tab_count .budgetTotal").html(budgetTotal);
+	$(".tab_provinceProject .tab_count .costTotal").html(costTotal);
+	$(".tab_provinceProject .tab_count .percentTotal").html((costTotal / budgetTotal * 100).toFixed(2) + "%");
+}
+
+//县级统计项目
+function county_projectTotal() {
+	var budgetTotal = 0, costTotal = 0;
+	$(".tab_cityProject .tab_content .countyBudget").each(function() {
+		budgetTotal += parseInt($(this).html());
+	});
+	$(".tab_cityProject .tab_content .countyCost").each(function() {
+		costTotal += parseInt($(this).html());
+	});
+	$(".tab_cityProject .tab_count .budgetTotal").html(budgetTotal);
+	$(".tab_cityProject .tab_count .costTotal").html(costTotal);
+	$(".tab_cityProject .tab_count .percentTotal").html((costTotal / budgetTotal * 100).toFixed(2) + "%");
+}
+
+// 根据条件查询市项目
+function queryProjectByCondition() {
+	var cityName;
+	$(".projectRight .sel_allCity option").each(function() {});
+}
+
+// 根据市名查询县
+function queryCountyByCity() {
+	var cityName;
 	$(".projectRight .sel_allCity option").each(function() {
 		if (this.selected) {
-			var data = {"cityName":$(this).val()};
-			$.ajax({
-				type:"post",
-				url:"/STProject2/servlet/ProvinceServlet?type=queryProjectByCityName",
-				dataType:"json",
-				data:data,
-				success:function(data){
-					var $tab_project = $(".projectRight .tab_provinceProject");
-					$tab_project.find("tr.tab_content").remove();
-					var i = 1;
-					$(data[0]).each(function() {
-						$tab_project.append("<tr class='tab_content'><td>"+i+"</td>" +
-							"<td>"+this.city_Name_PPFK+"</td><td>"+this.province_RFC_PPFK+"</td>" +
-							"<td>"+data[1][i-1].SBJ_Class+"</td><td>"+data[1][i-1].SBJ_Regulation+"</td>" +
-							"<td>"+data[1][i-1].SBJ_Item+"</td><td>"+this.project_Name+"</td>" +
-							"<td>"+this.total_Budget+"</td><td>"+this.centre_Budget+"</td>" +
-							"<td>"+this.province_Budget+"</td><td>"+this.city_Local_Budget+"</td>" +
-							"<td>"+this.city_Local_Cost+"</td><td>"+this.city_Local_Percent+"</td>" +
-							"<td>"+this.county_Budget+"</td><td>"+this.county_Cost+"</td>" +
-							"<td>"+this.county_Percent+"%</td><td></td><td>" +
-	                        "<button type='button' value='"+this.project_Name+"'>删除</button> |" +
-	                        "<button type='button' value='"+this.project_Name+"'>修改</button></td></tr>");
-					});
-				}
-			});
+			cityName = $(this).val();
+			var data = {"cityName":cityName};
+			if (cityName != 0) {
+				$.ajax({
+					type:"post",
+					url:"/STProject2/servlet/ProvinceServlet?type=queryCountyByCityName",
+					dataType:"json",
+					data:data,
+					success:function(data){
+						var $county = $(".projectRight .sel_allCounty");
+						$county.find("option.content").remove();
+						$(data).each(function() {
+							$county.append("<option class='content' value='"+this.county_Name+"'>"+this.county_Name+"</option>");
+						});
+					}
+				});
+			} else {
+				$(".projectRight .sel_allCounty option.content").remove();
+			}
 		}
 	});
 }
 
-//根据市查询省级项目表
-function queryProjectByProvinceRFC() {
-	$(".projectRight .sel_allPPFK option").each(function() {
-		if (this.selected) {
-			var data = {"provinceRFC":$(this).val()};
-			$.ajax({
-				type:"post",
-				url:"/STProject2/servlet/ProvinceServlet?type=queryProjectByProvinceRFC",
-				dataType:"json",
-				data:data,
-				success:function(data){
-					var $tab_project = $(".projectRight .tab_provinceProject");
-					$tab_project.find("tr.tab_content").remove();
-					var i = 1;
-					$(data[0]).each(function() {
-						$tab_project.append("<tr class='tab_content'><td>"+i+"</td>" +
-							"<td>"+this.city_Name_PPFK+"</td><td>"+this.province_RFC_PPFK+"</td>" +
-							"<td>"+data[1][i-1].SBJ_Class+"</td><td>"+data[1][i-1].SBJ_Regulation+"</td>" +
-							"<td>"+data[1][i-1].SBJ_Item+"</td><td>"+this.project_Name+"</td>" +
-							"<td>"+this.total_Budget+"</td><td>"+this.centre_Budget+"</td>" +
-							"<td>"+this.province_Budget+"</td><td>"+this.city_Local_Budget+"</td>" +
-							"<td>"+this.city_Local_Cost+"</td><td>"+this.city_Local_Percent+"</td>" +
-							"<td>"+this.county_Budget+"</td><td>"+this.county_Cost+"</td>" +
-							"<td>"+this.county_Percent+"%</td><td></td><td>" +
-	                        "<button type='button' value='"+this.project_Name+"'>删除</button> |" +
-	                        "<button type='button' value='"+this.project_Name+"'>修改</button></td></tr>");
-					});
-				}
-			});
-		}
-	});
-}
-
-//根据市查询省级项目表
-function queryProjectBySubClass() {
+// 根据类查询款
+function queryRegByClass() {
 	$(".projectRight .sel_allClass option").each(function() {
 		if (this.selected) {
-			var data = {"subClass":$(this).val()};
-			$.ajax({
-				type:"post",
-				url:"/STProject2/servlet/ProvinceServlet?type=queryProjectBySubClass",
-				dataType:"json",
-				data:data,
-				success:function(data){
-					var $tab_project = $(".projectRight .tab_provinceProject");
-					$tab_project.find("tr.tab_content").remove();
-					var i = 1;
-					$(data[0]).each(function() {
-						$tab_project.append("<tr class='tab_content'><td>"+i+"</td>" +
-							"<td>"+this.city_Name_PPFK+"</td><td>"+this.province_RFC_PPFK+"</td>" +
-							"<td>"+data[1][i-1].SBJ_Class+"</td><td>"+data[1][i-1].SBJ_Regulation+"</td>" +
-							"<td>"+data[1][i-1].SBJ_Item+"</td><td>"+this.project_Name+"</td>" +
-							"<td>"+this.total_Budget+"</td><td>"+this.centre_Budget+"</td>" +
-							"<td>"+this.province_Budget+"</td><td>"+this.city_Local_Budget+"</td>" +
-							"<td>"+this.city_Local_Cost+"</td><td>"+this.city_Local_Percent+"</td>" +
-							"<td>"+this.county_Budget+"</td><td>"+this.county_Cost+"</td>" +
-							"<td>"+this.county_Percent+"%</td><td></td><td>" +
-	                        "<button type='button' value='"+this.project_Name+"'>删除</button> |" +
-	                        "<button type='button' value='"+this.project_Name+"'>修改</button></td></tr>");
-					});
-				}
-			});
+			var subClass = $(this).val();
+			var data = {"class":subClass};
+			if (subClass != 0) {
+				$.ajax({
+					type:"post",
+					url:"/STProject2/servlet/ProvinceServlet?type=querySubjectByClass",
+					dataType:"json",
+					data:data,
+					success:function(data){
+						var $reg = $(".projectRight .sel_allRegulation");
+						$reg.find("option.content").remove();
+						$(data[1]).each(function() {
+							$reg.append("<option class='content' value='"+this+"'>"+this+"</option>");
+						});
+					}
+				});
+			} else {
+				$(".projectRight .sel_allRegulation option.content").remove();
+			}
+		}
+	});
+}
+
+// 根据款查询项
+function queryItemByReg() {
+	$(".projectRight .sel_allRegulation option").each(function() {
+		if (this.selected) {
+			var subReg = $(this).val();
+			var data = {"regulation":subReg};
+			if (subReg != 0) {
+				$.ajax({
+					type:"post",
+					url:"/STProject2/servlet/ProvinceServlet?type=querySubjectByRegulation",
+					dataType:"json",
+					data:data,
+					success:function(data){
+						var $item = $(".projectRight .sel_allItem");
+						$item.find("option.content").remove();
+						$(data[1]).each(function() {
+							$item.append("<option class='content' value='"+this+"'>"+this+"</option>");
+						});
+					}
+				});
+			} else {
+				$(".projectRight .sel_allItem option.content").remove();
+			}
 		}
 	});
 }
@@ -200,7 +235,7 @@ $(".projectRight .handle .addCityProject").click(function() {
     setCenter();
 });
 
-// 添加省级项目
+// 添加市项目
 $("#addCityProject .content .btn_addCityProject").click(function() {
 	var $content = $("#addCityProject .content");
 	var cityRfc = $content.find(".cityRfc").val();

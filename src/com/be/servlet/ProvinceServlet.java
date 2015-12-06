@@ -43,10 +43,11 @@ public class ProvinceServlet extends HttpServlet {
 	private List<City> citys = null;
 	private JSONArray jsonArr = null;
 	private List<County> countys = null;
+	private County countyObj = null;
 	private Map<String, List<County>> cityCountys = null;
 	private Subject subjectObj = null;
 	private List<Subject> subjects = null;
-	private List<ProvinceProject> projects = null;
+	private List<CityProject> cityProjects = null;
 	private List<User> users = null;
 	private User userObj = null;
 	private List<ProvinceRfc> provinceRfcs = null;
@@ -82,10 +83,11 @@ public class ProvinceServlet extends HttpServlet {
 		case "querySubjectByRegulation" : querySubjectByRegulation(request, response); break;
 		case "querySubjectByItem" : querySubjectByItem(request, response); break;
 		case "deleteSubject" : deleteSubject(request, response); break;
-		case "queryProjectByCityName" : queryProjectByCityName(request, response); break;
-		case "queryProjectByProvinceRFC" : queryProjectByProvinceRFC(request, response); break;
-		case "queryProjectBySubClass" : queryProjectBySubClass(request, response); break;
+		//case "queryProjectByCityName" : queryProjectByCityName(request, response); break;
+		//case "queryProjectByProvinceRFC" : queryProjectByProvinceRFC(request, response); break;
+		//case "queryProjectBySubClass" : queryProjectBySubClass(request, response); break;
 		case "addProvinceProject" : addProvinceProject(request, response); break;
+		case "queryRfcByRfc" : queryRfcByRfc(request, response); break;
 		}
 	}
 
@@ -94,6 +96,30 @@ public class ProvinceServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
+	/**
+	 * 根据文号的一部分模糊查询文号
+	 * @author blindeagle
+	 * @param request 请求对象
+	 * @param response 响应对象
+	 * @return void
+	 */
+	private void queryRfcByRfc(HttpServletRequest request, HttpServletResponse response) {
+		String provinceRfc = request.getParameter("provinceRfc");
+		cityProjects = CityProjectOp.getAllCityProject();
+		List<String> result = new ArrayList<String>();
+		for (CityProject project : cityProjects) {
+			if (project.getCity_RFC_CPFK().contains(provinceRfc)) {
+				result.add(project.getCity_RFC_CPFK());
+			}
+		}
+		jsonArr = JSONArray.fromObject(result);
+		try {
+			response.getWriter().print(jsonArr);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * 跳转到用户管理界面
 	 * @author blindeagle
@@ -141,16 +167,28 @@ public class ProvinceServlet extends HttpServlet {
 	private void toProjectManage(HttpServletRequest request, HttpServletResponse response) {
 		citys = CityOp.getAllCity();
 		provinceRfcs = ProvinceRfcOp.getAllProvinceRfc();
-		projects = ProvinceProjectOp.getAllProvinceProject();
+		List<String> proCitys = new ArrayList<String>();
+		cityProjects = CityProjectOp.getAllCityProject();
+		for (CityProject project : cityProjects) {
+			countyObj = CountyOp.getAllCountyByCountyName(project.getCounty_name_CPFK()).get(0);
+			cityObj = CityOp.getCityByID(countyObj.getCity_FK());
+			proCitys.add(cityObj.getCityName());
+		}
+		List<String> subClasses = new ArrayList<String>();
 		subjects = new ArrayList<Subject>();
-		for (ProvinceProject project : projects) {
-			subjects = SubjectOp.getSubjectByName(project.getSubject_PPFK());
+		for (CityProject project : cityProjects) {
+			subjectObj = SubjectOp.getSubjectByName(project.getSubject_Name_CPFK()).get(0);
 			subjects.add(subjectObj);
+			if (!subClasses.contains(subjectObj.getSBJ_Class())) {
+				subClasses.add(subjectObj.getSBJ_Class());
+			}
 		}
 		request.setAttribute("citys", citys);
 		request.setAttribute("provinceRfcs", provinceRfcs);
 		request.setAttribute("subjects", subjects);
-		request.setAttribute("projects", projects);
+		request.setAttribute("subClasses", subClasses);
+		request.setAttribute("cityProjects", cityProjects);
+		request.setAttribute("proCitys", proCitys);
 		try {
 			request.getRequestDispatcher("/WEB-INF/jsp/province/projectManage.jsp").forward(request, response);
 		} catch (ServletException | IOException e) {
@@ -435,15 +473,7 @@ public class ProvinceServlet extends HttpServlet {
 	 */
 	private void querySubjectByRegulation(HttpServletRequest request, HttpServletResponse response) {
 		String regulation = request.getParameter("regulation");
-		String subClass = request.getParameter("subClass");
 		subjects = SubjectOp.getSubjectByRegulation(regulation);
-		for (int i = 0; i < subjects.size(); i++) {
-			Subject subject = subjects.get(i);
-			if (!subClass.equals(subject.getSBJ_Class())) {
-				subjects.remove(i);
-				i--;
-			}
-		}
 		List<String> items = new ArrayList<String>();
 		for (Subject subject : subjects) {
 			if (! items.contains(subject.getSBJ_Item())) {
@@ -521,9 +551,10 @@ public class ProvinceServlet extends HttpServlet {
 	 * @param response 响应对象
 	 * @return void
 	 */
+	/*
 	private void queryProjectByCityName(HttpServletRequest request, HttpServletResponse response) {
 		String cityName = request.getParameter("cityName");
-		projects = ProvinceProjectOp.getProvinceProjectByCityName(cityName);
+		cityProjects = CityProjectOp.getProvinceProjectByCityNam(cityName);
 		subjects = new ArrayList<Subject>();
 		for (ProvinceProject project : projects) {
 			subjectObj = SubjectOp.getSubjectByName(project.getSubject_PPFK()).get(0);
@@ -539,6 +570,7 @@ public class ProvinceServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+	*/
 	
 	/**
 	 * 根据省级文号查询省级项目
@@ -547,6 +579,7 @@ public class ProvinceServlet extends HttpServlet {
 	 * @param response 响应对象
 	 * @return void
 	 */
+	/*
 	private void queryProjectByProvinceRFC(HttpServletRequest request, HttpServletResponse response) {
 		String provinceRFC = request.getParameter("provinceRFC");
 		projects = ProvinceProjectOp.getProvinceProjectByRfc(provinceRFC);
@@ -565,6 +598,7 @@ public class ProvinceServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+	*/
 	
 	/**
 	 * 根据科目类查询省级项目
@@ -573,6 +607,7 @@ public class ProvinceServlet extends HttpServlet {
 	 * @param response 响应对象
 	 * @return void
 	 */
+	/*
 	private void queryProjectBySubClass(HttpServletRequest request, HttpServletResponse response) {
 		String subClass = request.getParameter("subClass");
 		subjectObj = SubjectOp.getSubjectByClass(subClass).get(0);
@@ -592,6 +627,7 @@ public class ProvinceServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+	*/
 	
 	/**
 	 * 添加科目

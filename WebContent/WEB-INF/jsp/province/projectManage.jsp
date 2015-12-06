@@ -16,40 +16,38 @@
     <link rel="StyleSheet" href="<%=request.getContextPath() %>/css/p1.css" type="text/css" />
     <link rel="StyleSheet" href="<%=request.getContextPath() %>/css/p2.css" type="text/css" />
 </head>
-<body>
+<body onload="javascript:projectTotal();">
     <div class="container">
         <jsp:include page="/public/top.jsp"></jsp:include>
         <div class="projectRight">
-        	<select class="sel_allCity pp_sel" onChange="queryProjectByCityName();">
-        		<option disabled selected>选择市</option>
+        	<select class="sel_allCity pp_sel" onChange="queryCountyByCity();">
+        		<option value="0" selected>选择市</option>
         		<c:forEach items="${citys }" var="city">
-        			<option value="${city.cityName }">${city.cityName }</option>
+        			<option class="content" value="${city.cityName }">${city.cityName }</option>
         		</c:forEach>
         	</select>
-        	<select class="sel_allPPFK pp_sel" onChange="queryProjectByProvinceRFC();">
-        		<option disabled selected>选择文号</option>
-        		<c:forEach items="${provinceRfcs }" var="rfc">
-        			<option value="${rfc.province_RFC }">${rfc.province_RFC }</option>
+        	<select class="sel_allCounty pp_sel" onChange="queryProjectByCondition();">
+        		<option value="0" selected>选择县</option>
+        		<c:forEach items="${countys }" var="city">
+        			<option class="content" value="${county.cityName }">${city.cityName }</option>
         		</c:forEach>
         	</select>
-        	<select class="sel_allClass pp_sel" onchange="queryProjectBySubClass();">
-           		<option disabled selected>选择类</option>
-           		<c:forEach items="${subjects }" var="subject">
-           			<option value="${subject.SBJ_Class }">${subject.SBJ_Class }</option>
+        	<select class="sel_allClass pp_sel" onchange="queryRegByClass();">
+           		<option value="0" selected>选择类</option>
+           		<c:forEach items="${subClasses }" var="subject">
+           			<option value="${subject }">${subject }</option>
            		</c:forEach>
            	</select>
-           	<select class="sel_allRegulation pp_sel" onchange="selRegQuerySubAndItem();">
-           		<option disabled selected>选择款</option>
-           		<c:forEach items="${subjects }" var="subject">
-           			<option value="${subject.SBJ_Regulation }">${subject.SBJ_Regulation }
-           		</c:forEach>
+           	<select class="sel_allRegulation pp_sel" onchange="queryItemByReg();">
+           		<option value="0" selected>选择款</option>
            	</select>
-           	<select class="sel_allItem pp_sel" onchange="selItemQuerySubject();">
-           		<option disabled selected>选择项</option>
-           		<c:forEach items="${subjects }" var="subject">
-           			<option value="${subject.SBJ_Item }">${subject.SBJ_Item }</option>
-           		</c:forEach>
+           	<select class="sel_allItem pp_sel" onchange="queryProjectByCondition();">
+           		<option value="0" selected>选择项</option>
            	</select>
+           	<input class="provinceRfc" type="text"/>
+           	<ul class="rfcItem"></ul>
+        	<input class="projectName" type="text"/>
+        	<ul class="projectItem"></ul>
             <div class="handle">
                 <button type="button" class="addProvinceProject">添加项目</button>
             </div>
@@ -62,7 +60,7 @@
                     <th rowspan="1" colspan="3">科目</th>
                     <th rowspan="2">项目名</th>
                     <th rowspan="2">预算指标</th>
-                    <th rowspan="2">支付情况</th>
+                    <th rowspan="2">支付数</th>
                     <th rowspan="2">支付进度</th>
                     <th rowspan="2">操作</th>
                 </tr>
@@ -71,31 +69,32 @@
                     <th>款</th>
                     <th>项</th>
                 </tr>
-                <c:forEach items="${projects }" var="project" varStatus="s">
+                <c:forEach items="${cityProjects }" var="project" varStatus="s">
 	                <tr class="tab_content">
 	                    <td>${s.count }</td>
-	                    <td>${project.city_Name_PPFK }</td>
-	                    <td>${project.province_RFC_PPFK }</td>
+	                    <td>${proCitys[s.count-1] }</td>
+	                    <td>${project.county_name_CPFK }</td>
+	                    <td>${project.city_RFC_CPFK }</td>
 	                    <td>${subjects[s.count-1].SBJ_Class }</td>
 	                    <td>${subjects[s.count-1].SBJ_Regulation }</td>
 	                    <td>${subjects[s.count-1].SBJ_Item }</td>
 	                    <td>${project.project_Name }</td>
-	                    <td>${project.total_Budget }</td>
-	                    <td>${project.centre_Budget }</td>
-	                    <td>${project.province_Budget }</td>
-	                    <td>${project.city_Local_Budget }</td>
-	                    <td>${project.city_Local_Cost }</td>
-	                    <td>${project.city_Local_Percent }</td>
-	                    <td>${project.county_Budget }</td>
-	                    <td>${project.county_Cost }</td>
-	                    <td>${project.county_Percent }%</td>
-	                    <td></td>
+	                    <td class="countyBudget">${project.county_Budget }</td>
+	                    <td class="countyCost">${project.county_Cost }</td>
+	                    <td>${project.county_Percent }</td>
 	                    <td>
 	                        <button type="button">删除</button> |
 	                        <button type="button">修改</button>
 	                    </td>
 	                </tr>
                 </c:forEach>
+                <tr class="tab_count">
+                	<td>合计</td>
+                	<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                	<td class="budgetTotal"></td>
+                	<td class="costTotal"></td>
+                	<td class="percentTotal"></td>
+                </tr>
             </table>
         </div>
         <jsp:include page="/public/bottom.jsp"></jsp:include>
