@@ -64,7 +64,6 @@
         		<button type="button" class="pageBtn">下一页</button>
         	</div>
         </div>
-        <jsp:include page="/public/bottom.jsp"></jsp:include>
     </div>
 
     <div id="gray"></div>

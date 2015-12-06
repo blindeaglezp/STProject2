@@ -97,7 +97,6 @@
                 </tr>
             </table>
         </div>
-        <jsp:include page="/public/bottom.jsp"></jsp:include>
     </div>
 
     <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-2.1.4.min.js"></script>

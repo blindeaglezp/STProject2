@@ -16,9 +16,61 @@
     <link rel="StyleSheet" href="<%=request.getContextPath() %>/css/p1.css" type="text/css" />
 </head>
 <body onload="province_initLeft();">
-    <div class="container">
-        <jsp:include page="/public/top.jsp"></jsp:include>
-        <jsp:include page="/public/left.jsp"></jsp:include>
+        	<jsp:include page="/public/top.jsp"></jsp:include>
+				<div class="sidebar" id="sidebar">
+					<script type="text/javascript">
+						try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+					</script>
+
+					<ul class="nav nav-list">
+						<li>
+							<a href="#">
+								<i class="icon-dashboard"></i>
+								<span class="menu-text"> 首页 </span>
+							</a>
+						</li>
+
+						<li>
+							<a href="<%=request.getContextPath()%>/servlet/ProvinceServlet?type=toUserManage">
+								<i class="icon-text-width"></i>
+								<span class="menu-text"> 用户管理 </span>
+							</a>
+						</li>
+
+						<li>
+							<a href="<%=request.getContextPath()%>/servlet/ProvinceServlet?type=toCityManage" class="dropdown-toggle">
+								<i class="icon-desktop"></i>
+								<span class="menu-text"> 市区管理 </span>
+							</a>
+						</li>
+
+						<li>
+							<a href="<%=request.getContextPath()%>/servlet/ProvinceServlet?type=toSubjectManage" class="dropdown-toggle">
+								<i class="icon-list"></i>
+								<span class="menu-text"> 科目管理 </span>
+							</a>
+						</li>
+
+						<li>
+							<a href="<%=request.getContextPath()%>/servlet/ProvinceServlet?type=toProjectManage" class="dropdown-toggle">
+								<i class="icon-edit"></i>
+								<span class="menu-text"> 项目管理 </span>
+							</a>
+						</li>
+					</ul><!-- /.nav-list -->
+				</div>
+		<script src="<%=request.getContextPath() %>/assets/js/bootstrap.min.js"></script>
+		<script src="<%=request.getContextPath() %>/assets/js/typeahead-bs2.min.js"></script>
+		<script src="<%=request.getContextPath() %>/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+		<script src="<%=request.getContextPath() %>/assets/js/jquery.ui.touch-punch.min.js"></script>
+		<script src="<%=request.getContextPath() %>/assets/js/jquery.slimscroll.min.js"></script>
+		<script src="<%=request.getContextPath() %>/assets/js/jquery.easy-pie-chart.min.js"></script>
+		<script src="<%=request.getContextPath() %>/assets/js/jquery.sparkline.min.js"></script>
+		<script src="<%=request.getContextPath() %>/assets/js/flot/jquery.flot.min.js"></script>
+		<script src="<%=request.getContextPath() %>/assets/js/flot/jquery.flot.pie.min.js"></script>
+		<script src="<%=request.getContextPath() %>/assets/js/flot/jquery.flot.resize.min.js"></script>
+		<script src="<%=request.getContextPath() %>/assets/js/ace-elements.min.js"></script>
+		<script src="<%=request.getContextPath() %>/assets/js/ace.min.js"></script>
         <div class="right">
             <div class="handle">
                 <button type="button" class="addCity">添加市</button>
@@ -41,9 +93,7 @@
                 </c:forEach>
             </table>
         </div>
-        <jsp:include page="/public/bottom.jsp"></jsp:include>
-    </div>
-
+        
     <div id="gray"></div>
     <div id="addCity" class="pop">
         <div class="title">添加市<a href="javascript:void(0);" class="close">X</a></div>

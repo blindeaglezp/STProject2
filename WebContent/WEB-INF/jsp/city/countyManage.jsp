@@ -16,9 +16,65 @@
     <link rel="StyleSheet" href="<%=request.getContextPath() %>/css/p1.css" type="text/css" />
 </head>
 <body onload="city_initLeft();">
-    <div class="container">
         <jsp:include page="/public/top.jsp"></jsp:include>
-        <jsp:include page="/public/left.jsp"></jsp:include>
+          <div class="sidebar" id="sidebar">
+					<script type="text/javascript">
+						try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+					</script>
+
+					<ul class="nav nav-list">
+						<li>
+							<a href="#">
+								<i class="icon-dashboard"></i>
+								<span class="menu-text"> 首页 </span>
+							</a>
+						</li>
+
+						<li>
+							<a href="<%=request.getContextPath()%>/servlet/CityServlet?type=toUserManage">
+								<i class="icon-text-width"></i>
+								<span class="menu-text"> 用户管理 </span>
+							</a>
+						</li>
+
+						<li>
+							<a href="<%=request.getContextPath()%>/servlet/CityServlet?type=toCountyManage">
+								<i class="icon-desktop"></i>
+								<span class="menu-text"> 县管理  </span>
+							</a>
+						</li>
+
+						<li>
+							<a href="<%=request.getContextPath()%>/servlet/CityServlet?type=toCityProjectManage" >
+								<i class="icon-list"></i>
+								<span class="menu-text"> 市级项目管理 </span>
+							</a>
+						</li>
+
+						<li>
+							<a href="<%=request.getContextPath()%>/servlet/CityServlet?type=toCountyProjectManage">
+								<i class="icon-edit"></i>
+								<span class="menu-text"> 县级项目查看 </span>
+							</a>
+						</li>
+					</ul><!-- /.nav-list -->
+				</div>
+		<script src="<%=request.getContextPath() %>/assets/js/bootstrap.min.js"></script>
+		<script src="<%=request.getContextPath() %>/assets/js/typeahead-bs2.min.js"></script>
+		<script src="<%=request.getContextPath() %>/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+		<script src="<%=request.getContextPath() %>/assets/js/jquery.ui.touch-punch.min.js"></script>
+		<script src="<%=request.getContextPath() %>/assets/js/jquery.slimscroll.min.js"></script>
+		<script src="<%=request.getContextPath() %>/assets/js/jquery.easy-pie-chart.min.js"></script>
+		<script src="<%=request.getContextPath() %>/assets/js/jquery.sparkline.min.js"></script>
+		<script src="<%=request.getContextPath() %>/assets/js/flot/jquery.flot.min.js"></script>
+		<script src="<%=request.getContextPath() %>/assets/js/flot/jquery.flot.pie.min.js"></script>
+		<script src="<%=request.getContextPath() %>/assets/js/flot/jquery.flot.resize.min.js"></script>
+		<script src="<%=request.getContextPath() %>/assets/js/ace-elements.min.js"></script>
+		<script src="<%=request.getContextPath() %>/assets/js/ace.min.js"></script>
+        
+        
+        
+        
         <div class="right">
             <div class="handle">
                 <button type="button" class="addCounty">添加县</button>
@@ -47,8 +103,6 @@
         		<button type="button" class="pageBtn">下一页</button>
         	</div>
         </div>
-        <jsp:include page="/public/bottom.jsp"></jsp:include>
-    </div>
 
     <div id="gray"></div>
     <div id="addCounty" class="pop">

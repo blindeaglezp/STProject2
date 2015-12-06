@@ -102,7 +102,6 @@
                 </c:forEach>
             </table>
         </div>
-        <jsp:include page="/public/bottom.jsp"></jsp:include>
     </div>
     
     <div id="gray" class="addProvinceProjectGray"></div>
