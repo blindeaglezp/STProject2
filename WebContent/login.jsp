@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <title>登录</title>
     <meta name="Keywords" content="">
     <meta name="description" content="">
@@ -74,14 +74,14 @@
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control"  name="userName" placeholder="Username" />
+															<input type="text" class="form-control"  name="userName" placeholder="用户名" />
 															<i class="icon-user"></i>
 														</span>
 													</label>
 
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="Password" name="password" />
+															<input type="password" class="form-control" placeholder="密码" name="password" />
 															<i class="icon-lock"></i>
 														</span>
 													</label>
