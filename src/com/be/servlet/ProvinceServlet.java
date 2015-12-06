@@ -51,6 +51,7 @@ public class ProvinceServlet extends HttpServlet {
 	private List<User> users = null;
 	private User userObj = null;
 	private List<ProvinceRfc> provinceRfcs = null;
+	private List<ProvinceProject> provinceProjects = null;
 	private ProvinceProject provinceProjectObj = null;
 	private CityProject cityProjectObj = null;
 	private ProvinceRfc provinceRfcObj = null;
@@ -206,6 +207,12 @@ public class ProvinceServlet extends HttpServlet {
 			cityObj = CityOp.getCityByID(countyObj.getCity_FK());
 			proCitys.add(cityObj.getCityName());
 		}
+		provinceProjects = ProvinceProjectOp.getAllProvinceProject();
+		List<Subject> proSubjects = new ArrayList<Subject>();
+		for (ProvinceProject pp : provinceProjects) {
+			proSubjects.add(SubjectOp.getSubjectByName(pp.getSubject_PPFK()).get(0));
+		}
+		
 		List<String> subClasses = new ArrayList<String>();
 		subjects = new ArrayList<Subject>();
 		for (CityProject project : cityProjects) {
@@ -216,9 +223,10 @@ public class ProvinceServlet extends HttpServlet {
 			}
 		}
 		request.setAttribute("citys", citys);
+		request.setAttribute("provinceProjects", provinceProjects);
 		request.setAttribute("provinceRfcs", provinceRfcs);
 		request.setAttribute("subjects", subjects);
-		request.setAttribute("subClasses", subClasses);
+		request.setAttribute("proSubjects", proSubjects);
 		request.setAttribute("cityProjects", cityProjects);
 		request.setAttribute("proCitys", proCitys);
 		try {
@@ -743,9 +751,9 @@ public class ProvinceServlet extends HttpServlet {
 					provinceProjectObj.setCounty_Cost(0);
 				}
 				if (cs[4] != null && !"".equals(cs[4])) {
-					provinceProjectObj.setCounty_Cost(Integer.parseInt(cs[4]));
+					provinceProjectObj.setCounty_Percent(Integer.parseInt(cs[4]));
 				} else {
-					provinceProjectObj.setCounty_Cost(0);
+					provinceProjectObj.setCounty_Percent(0);
 				}
 				ProvinceProjectOp.insertProvinceProject(provinceProjectObj);
 				// 添加省文号
@@ -765,13 +773,13 @@ public class ProvinceServlet extends HttpServlet {
 				cityProjectObj.setSubject_Name_CPFK(subjectObj.getSBJ_Name());
 				cityProjectObj.setCounty_name_CPFK(cs[1]);
 				cityProjectObj.setProjec_Name(projectName);
-				if (cs[2] != null && "".equals(cs[2])) {
+				if (cs[2] != null && !"".equals(cs[2])) {
 					cityProjectObj.setCounty_Budget(Integer.parseInt(cs[2]));
 				}
-				if (cs[3] != null && "".equals(cs[3])) {
+				if (cs[3] != null && !"".equals(cs[3])) {
 					cityProjectObj.setCounty_Cost(Integer.parseInt(cs[3]));
 				}
-				if (cs[4] != null && "".equals(cs[4])) {
+				if (cs[4] != null && !"".equals(cs[4])) {
 					cityProjectObj.setCounty_Cost(Integer.parseInt(cs[4]));
 				}
 				CityProjectOp.insertCityProject(cityProjectObj);

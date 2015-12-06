@@ -83,6 +83,25 @@
 	                    </td>
 	                </tr>
                 </c:forEach>
+                <c:forEach items="${provinceProjects }" var="project" varStatus="s">
+	                <tr class="tab_content">
+	                    <td>${s.count }</td>
+	                    <td>${proCitys[s.count-1] }</td>
+	                    <td></td>
+	                    <td>${project.province_RFC_PPFK }</td>
+	                    <td>${proSubjects[s.count-1].SBJ_Class }</td>
+	                    <td>${proSubjects[s.count-1].SBJ_Regulation }</td>
+	                    <td>${proSubjects[s.count-1].SBJ_Item }</td>
+	                    <td>${project.project_Name }</td>
+	                    <td class="countyBudget">${project.city_Local_Budget }</td>
+	                    <td class="countyCost">${project.city_Local_Cost }</td>
+	                    <td>${project.city_Local_Percent }</td>
+	                    <td>
+	                        <button type="button">删除</button> |
+	                        <button type="button">修改</button>
+	                    </td>
+	                </tr>
+                </c:forEach>
                 <tr class="tab_count">
                 	<td>合计</td>
                 	<td></td><td></td><td></td><td></td><td></td><td></td><td></td>

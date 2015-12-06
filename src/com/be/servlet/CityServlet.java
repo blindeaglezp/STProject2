@@ -395,8 +395,6 @@ public class CityServlet extends HttpServlet {
 		subjectObj = SubjectOp.getSubjectByID(subClass + regulation + item).get(0);
 		String projectName = request.getParameter("projectName");
 		int totalBudget = Integer.parseInt(request.getParameter("totalBudget"));
-		int centreBudget = Integer.parseInt(request.getParameter("centreBudget"));
-		int provinceBudget = Integer.parseInt(request.getParameter("provinceBudget"));
 		int cityLocalBudget = Integer.parseInt(request.getParameter("cityLocalBudget"));
 		int cityLocalCost = Integer.parseInt(request.getParameter("cityLocalCost"));
 		int cityLocalPercent = Integer.parseInt(request.getParameter("cityLocalPercent"));
@@ -408,59 +406,21 @@ public class CityServlet extends HttpServlet {
 		for (String cc : cityAndCountys) {
 			String[] cs = cc.split(":");
 			
-			if (cs[0] == null || "".equals(cs[1])) {
-				// 添加省项目
-				provinceProjectObj = new ProvinceProject();
-				provinceProjectObj.setProvince_RFC_PPFK(provinceRfc);
-				provinceProjectObj.setCity_Name_PPFK(cs[0]);
-				provinceProjectObj.setSubject_PPFK(subjectObj.getSBJ_Name());
-				provinceProjectObj.setProject_Name(projectName);
-				provinceProjectObj.setTotal_Budget(totalBudget);
-				provinceProjectObj.setCentre_Budget(centreBudget);
-				provinceProjectObj.setProvince_Budget(provinceBudget);
-				provinceProjectObj.setCity_Local_Budget(cityLocalBudget);
-				provinceProjectObj.setCity_Local_Cost(cityLocalCost);
-				provinceProjectObj.setCity_Local_Percent(cityLocalPercent);
-				if (cs[2] != null && !"".equals(cs[2])) {
-					provinceProjectObj.setCounty_Budget(Integer.parseInt(cs[2]));
-				} else {
-					provinceProjectObj.setCounty_Budget(0);
-				}
-				if (cs[3] != null && !"".equals(cs[3])) {
-					provinceProjectObj.setCounty_Cost(Integer.parseInt(cs[3]));
-				} else {
-					provinceProjectObj.setCounty_Cost(0);
-				}
-				if (cs[4] != null && !"".equals(cs[4])) {
-					provinceProjectObj.setCounty_Cost(Integer.parseInt(cs[4]));
-				} else {
-					provinceProjectObj.setCounty_Cost(0);
-				}
-				ProvinceProjectOp.insertProvinceProject(provinceProjectObj);
-				// 添加省文号
-				provinceRfcObj = new ProvinceRfc();
-				provinceRfcObj.setCity_Name(cs[0]);
-				provinceRfcObj.setProvince_RFC(provinceRfc);
-				provinceRfcObj.setSBJ_ID_CITYFK(subjectObj.getSBJ_ID());
-				provinceRfcObj.setSBJ_Name_CITYFK(subjectObj.getSBJ_Name());
-				ProvinceRfcOp.insertProvinceRfc(provinceRfcObj);
-			}
-			
-			if ((cs[0] != null && !"".equals(cs[0])) && (cs[1] != null && !"".equals(cs[1]))) {
+			if ((cs[0] != null && !"".equals(cs[0]))) {
 				// 封装对象
 				cityProjectObj = new CityProject();
 	//						cityProjectObj.setCity_RFC_CPFK(cityRfc);
 				cityProjectObj.setSubject_Name_CPFK(subjectObj.getSBJ_Name());
-				cityProjectObj.setCounty_name_CPFK(cs[1]);
+				cityProjectObj.setCounty_name_CPFK(cs[0]);
 				cityProjectObj.setProjec_Name(projectName);
+				if (cs[1] != null && "".equals(cs[1])) {
+					cityProjectObj.setCounty_Budget(Integer.parseInt(cs[1]));
+				}
 				if (cs[2] != null && "".equals(cs[2])) {
-					cityProjectObj.setCounty_Budget(Integer.parseInt(cs[2]));
+					cityProjectObj.setCounty_Cost(Integer.parseInt(cs[2]));
 				}
 				if (cs[3] != null && "".equals(cs[3])) {
 					cityProjectObj.setCounty_Cost(Integer.parseInt(cs[3]));
-				}
-				if (cs[4] != null && "".equals(cs[4])) {
-					cityProjectObj.setCounty_Cost(Integer.parseInt(cs[4]));
 				}
 				CityProjectOp.insertCityProject(cityProjectObj);
 			}

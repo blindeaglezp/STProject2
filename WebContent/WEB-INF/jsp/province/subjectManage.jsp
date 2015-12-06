@@ -108,7 +108,6 @@
 	                    <td class="td_userName">${subject.SBJ_Name }</td>
 	                    <td>
 	                        <button type="button" class="btn_deleteSubject" value="${subject.SBJ_ID }">删除</button> |
-	                        <button type="button" class="btn_deleteSubject" value="${subject.SBJ_ID }">修改</button>
 	                    </td>
 	                </tr>
                 </c:forEach>

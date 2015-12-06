@@ -206,8 +206,6 @@ $("#addProvinceProject .content .btn_addProvinceProject").click(function() {
 	var item = $content.find(".item").val();
 	var projectName = $content.find(".projectName").val();
 	var totalBudget = $content.find(".totalBudget").val();
-	var centreBudget = $content.find(".centreBudget").val();
-	var provinceBudget = $content.find(".provinceBudget").val();
 	var cityLocalBudget = $content.find(".cityLocalBudget").val();
 	var cityLocalCost = $content.find(".cityLocalCost").val();
 	var cityLocalPercent = $content.find(".cityLocalPercent").val();
@@ -249,6 +247,7 @@ $("#addProvinceProject .content .btn_addProvinceProject").click(function() {
 		    });
 		}
 	});
+	window.location.reload(); 
 });
 
 //点击添加按钮，弹出添加市级项目的窗体
