@@ -19,7 +19,6 @@
 		<!--[if IE 7]>
 		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
 		<![endif]-->
-
 		<link rel="stylesheet" href="<%=request.getContextPath() %>/assets/css/ace.min.css" />
 		<link rel="stylesheet" href="<%=request.getContextPath() %>/assets/css/ace-rtl.min.css" />
 		<link rel="stylesheet" href="<%=request.getContextPath() %>/assets/css/ace-skins.min.css" />
