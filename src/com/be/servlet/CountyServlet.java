@@ -83,8 +83,11 @@ public class CountyServlet extends HttpServlet {
 		for (CityProject cp : cityProjects) {
 			System.out.println(cp.getCity_RFC_CPFK());
 			if (projectName.equals(cp.getProject_Name())) {
-				cp.setCounty_Cost(cost);
-				CityProjectOp.updateCityProject(cp);
+				cityProjectObj = cp;
+				CityProjectOp.deleteCityProject(projectName);
+				cityProjectObj.setCounty_Cost(cost);
+				CityProjectOp.insertCityProject(cityProjectObj);
+//				CityProjectOp.updateCityProject(cp);
 				break;
 			}
 		}
