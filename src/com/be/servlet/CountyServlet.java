@@ -58,6 +58,7 @@ public class CountyServlet extends HttpServlet {
 		case "toProjectManage" : toProjectManage(request, response); break;
 		case "queryCountyByName" : queryCountyByName(request, response); break;
 		case "addCityProject" : addCountyProject(request, response); break;
+		case "updateCountyProject" : updateCountyProject(request, response); break;
 		}
 		
 	}
@@ -65,6 +66,43 @@ public class CountyServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
+	}
+	
+	/**
+	 * 更新县级项目
+	 * @author blindeagle
+	 * @param request 请求对象
+	 * @param response 响应对象
+	 * @return void
+	 */
+	private void updateCountyProject(HttpServletRequest request, HttpServletResponse response) {
+		String cityRfc = request.getParameter("cityRfc");
+		String projectName = request.getParameter("projectName");
+		int cost = Integer.parseInt(request.getParameter("cost"));
+		cityProjects = CityProjectOp.getCityProjectByCityRfc(cityRfc);
+		for (CityProject cp : cityProjects) {
+			System.out.println(cp.getCity_RFC_CPFK());
+			if (projectName.equals(cp.getProject_Name())) {
+				cp.setCounty_Cost(cost);
+				CityProjectOp.updateCityProject(cp);
+				break;
+			}
+		}
+		userObj = (User) request.getSession().getAttribute("user");
+		cityProjects = CityProjectOp.getCityProjectByCountyName(userObj.getUser_County_Name());
+		subjects = new ArrayList<Subject>();
+		for (CityProject cp : cityProjects) {
+			subjects.add(SubjectOp.getSubjectByName(cp.getSubject_Name_CPFK()).get(0));
+		}
+		List<Object> result = new ArrayList<Object>();
+		result.add(cityProjects);
+		result.add(subjects);
+		jsonArr = JSONArray.fromObject(result);
+		try {
+			response.getWriter().print(jsonArr);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**

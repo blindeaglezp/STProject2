@@ -88,6 +88,7 @@ public class ProvinceServlet extends HttpServlet {
 		//case "queryProjectBySubClass" : queryProjectBySubClass(request, response); break;
 		case "addProvinceProject" : addProvinceProject(request, response); break;
 		case "queryRfcByRfc" : queryRfcByRfc(request, response); break;
+		case "queryProjectByCondition" : queryProjectByCondition(request, response); break;
 		}
 	}
 
@@ -96,6 +97,21 @@ public class ProvinceServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
+	private void queryProjectByCondition(HttpServletRequest request, HttpServletResponse response) {
+		String cityName = request.getParameter("cityName");
+		String countyName = request.getParameter("countyName");
+		String subClass = request.getParameter("subClass");
+		String subReg = request.getParameter("subReg");
+		String subItem = request.getParameter("subItem");
+		String provinceRfc = request.getParameter("provinceRfc");
+		String projectName = request.getParameter("projectName");
+		cityProjects = CityProjectOp.getAllCityProject();
+		List<CityProject> result = new ArrayList<CityProject>();
+		for (CityProject project : cityProjects) {
+//			if (cityName != null && !"".equals(cityName) && cityName.equals(project.get))
+		}
+	}
+	
 	/**
 	 * 根据文号的一部分模糊查询文号
 	 * @author blindeagle
@@ -729,6 +745,7 @@ public class ProvinceServlet extends HttpServlet {
 				// 封装对象
 				cityProjectObj = new CityProject();
 //				cityProjectObj.setCity_RFC_CPFK(cityRfc);
+				cityProjectObj.setCity_RFC_CPFK(provinceRfc);
 				cityProjectObj.setSubject_Name_CPFK(subjectObj.getSBJ_Name());
 				cityProjectObj.setCounty_name_CPFK(cs[1]);
 				cityProjectObj.setProjec_Name(projectName);

@@ -28,9 +28,6 @@
         	</select>
         	<select class="sel_allCounty pp_sel" onChange="queryProjectByCondition();">
         		<option value="0" selected>选择县</option>
-        		<c:forEach items="${countys }" var="city">
-        			<option class="content" value="${county.cityName }">${city.cityName }</option>
-        		</c:forEach>
         	</select>
         	<select class="sel_allClass pp_sel" onchange="queryRegByClass();">
            		<option value="0" selected>选择类</option>
@@ -44,11 +41,10 @@
            	<select class="sel_allItem pp_sel" onchange="queryProjectByCondition();">
            		<option value="0" selected>选择项</option>
            	</select>
-           	<input class="provinceRfc" type="text"/>
-           	<ul class="rfcItem"></ul>
-        	<input class="projectName" type="text"/>
-        	<ul class="projectItem"></ul>
+           	<input placeholder="文号" style="margin-top:10px;" class="provinceRfc" type="text"/>
+        	<input placeholder="项目名" style="margin:10px 0 0 10px;" class="projectName" type="text"/>
             <div class="handle">
+            	<button type="button" class="queryProjectByCondition">查询</button>
                 <button type="button" class="addProvinceProject">添加项目</button>
             </div>
             <table border="1" class="tab_provinceProject">

@@ -4,24 +4,6 @@
  * date:2015.11.29
  */
 
-$(".provinceRfc").bind("input propertychange", function() {
-	var provinceRfc = $(this).val();
-	var data = {"provinceRfc":provinceRfc};
-	$.ajax({
-		type:"post",
-		url:"/STProject2/servlet/ProvinceServlet?type=queryRfcByRfc",
-		dataType:"json",
-		data:data,
-		success:function(data){
-			var $ul = $(".projectRight .rfcItem");
-			$ul.find("li").remove();
-			$(data).each(function() {
-				$ul.append("<li>"+this+"</li>");
-			});
-		}
-	});
-});
-
 // 省级统计项目
 function projectTotal() {
 	var budgetTotal = 0, costTotal = 0;
@@ -52,8 +34,49 @@ function county_projectTotal() {
 
 // 根据条件查询市项目
 function queryProjectByCondition() {
-	var cityName;
-	$(".projectRight .sel_allCity option").each(function() {});
+	var cityName, countyName, subClass, subReg, subItem, provinceRfc, projectName;
+	$(".projectRight .sel_allCity option").each(function() {
+		if (this.selected) {
+			cityName = $(this).val();
+		}
+	});
+	$(".projectRight .sel_allCounty option").each(function() {
+		if (this.selected) {
+			countyName = $(this).val();
+		}
+	});
+	$(".projectRight .sel_allClass option").each(function() {
+		if (this.selected) {
+			subClass = $(this).val();
+		}
+	});
+	$(".projectRight .sel_allRegulation option").each(function() {
+		if (this.selected) {
+			subReg = $(this).val();
+		}
+	});
+	$(".projectRight .sel_allItem option").each(function() {
+		if (this.selected) {
+			subItem = $(this).val();
+		}
+	});
+	provinceRfc = $(".provinceRfc").val();
+	projectName = $(".projectName").val();
+	var data = {"cityName":cityName,"countyName":countyName,"subClass":subClass,"subReg":subReg,
+			"subItem":subItem,"provinceRfc":provinceRfc,"projectName":projectName};
+	$.ajax({
+		type:"post",
+		url:"/STProject2/servlet/ProvinceServlet?type=queryProjectByCondition",
+		dataType:"json",
+		data:data,
+		success:function(data){
+			var $county = $(".projectRight .sel_allCounty");
+			$county.find("option.content").remove();
+			$(data).each(function() {
+				$county.append("<option class='content' value='"+this.county_Name+"'>"+this.county_Name+"</option>");
+			});
+		}
+	});
 }
 
 // 根据市名查询县
@@ -281,6 +304,48 @@ $("#addCityProject .content .btn_addCityProject").click(function() {
 	                    "<td>"+this.county_Cost+"</td><td>"+this.county_Percent+"%</td>" +
 	                    "<td></td><td><button type='button'>删除</button> |" +
 	                    "<button type='button'>修改</button></td></tr>");
+		    	i++;
+		    });
+		}
+	});
+});
+
+$(".btn_countyUpdate").click(function() {
+	$("#gray").show();
+	$("#updateCountyProject").show();
+	$("#updateCountyProject .content .cityRfc").val($(this).parents("tr.tab_content").find(".cityRfc").html());
+	$("#updateCountyProject .content .projectName").val($(this).parents("tr.tab_content").find(".projectName").html());
+});
+
+$(".btn_updateCountyProject").click(function() {
+	alert(0);
+	var $content = $(this).parent();
+	var cityRfc = $content.find(".cityRfc").val();
+	var projectName = $content.find(".projectName").val();
+	var cost = $content.find(".cost").val();
+	var data = {"cityRfc":cityRfc,"projectName":projectName,"cost":cost};
+	$.ajax({
+		type:"post",
+		url:"/STProject2/servlet/CountyServlet?type=updateCountyProject",
+		dataType:"json",
+		data:data,
+		success:function(data){
+			$("#gray").hide();
+		    $("#updateCountyProject").hide();
+		    var $tab_countyProject = $(".projectRight .tab_countyProject");
+		    $tab_countyProject.find("tr.tab_content").remove();
+		    var i = 1;
+		    $(data[0]).each(function() {
+		    	$tab_countyProject.append("<tr class='tab_content'><td>"+i+"</td>" +
+	                "<td class='cityRfc'>"+this.city_RFC_CPFK+"</td>" +
+	                "<td class='subClass'>"+data[1][i-1].SBJ_Class+"</td>" +
+	                "<td class='subReg'>"+data[1][i-1].SBJ_Regulation+"</td>" +
+	                "<td class='subItem'>"+data[1][i-1].SBJ_Item+"</td>" +
+	                "<td class='projectName'>"+this.project_Name+"</td>" +
+	                "<td class='budget'>"+this.county_Budget+"</td>" +
+	                "<td>"+this.county_Cost+"</td>" +
+	                "<td>"+this.county_Percent+"</td><td>" +
+	                "<button type='button' class=btn_countyUpdate>修改</button></td></tr>");
 		    	i++;
 		    });
 		}
