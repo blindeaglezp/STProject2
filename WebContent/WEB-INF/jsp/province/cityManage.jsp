@@ -24,7 +24,7 @@
 
 					<ul class="nav nav-list">
 						<li>
-							<a href="#">
+							<a href="<%=request.getContextPath()%>/servlet/ProvinceServlet?type=toIndex">
 								<i class="icon-dashboard"></i>
 								<span class="menu-text"> 首页 </span>
 							</a>

@@ -63,6 +63,7 @@ public class ProvinceServlet extends HttpServlet {
 		String type = request.getParameter("type");
 		
 		switch (type) {
+		case "toIndex" :toIndex(request,response); break;
 		case "toUserManage" : toUserManage(request, response); break;
 		case "toCityManage" : toCityManage(request, response); break;
 		case "toProjectManage" : toProjectManage(request, response); break;
@@ -94,6 +95,21 @@ public class ProvinceServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
+	}
+	/**
+	 * 跳转到首页
+	 * @author gaohailong
+	 * @param request
+	 * @param response
+	 */
+	private void toIndex(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			request.getRequestDispatcher("/WEB-INF/jsp/province/functionShow.jsp").forward(request, response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

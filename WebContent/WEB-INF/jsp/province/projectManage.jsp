@@ -17,7 +17,6 @@
     <link rel="StyleSheet" href="<%=request.getContextPath() %>/css/p2.css" type="text/css" />
 </head>
 <body onload="javascript:projectTotal();">
-    <div class="container">
         <jsp:include page="/public/top.jsp"></jsp:include>
         <div class="projectRight">
         	<select class="sel_allCity pp_sel" onChange="queryCountyByCity();">
@@ -97,8 +96,7 @@
                 </tr>
             </table>
         </div>
-        
-    </div>
+
     
     <div id="gray" class="addProvinceProjectGray"></div>
     <div id="addProvinceProject" class="pop2">

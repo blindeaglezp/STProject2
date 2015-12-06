@@ -56,7 +56,7 @@
 		</script>
 
 		<ul class="nav nav-list">
-			<li><a href="#"> <i class="icon-dashboard"></i> <span
+			<li><a href="<%=request.getContextPath()%>/servlet/ProvinceServlet?type=toIndex"> <i class="icon-dashboard"></i> <span
 					class="menu-text"> 首页 </span>
 			</a></li>
 
