@@ -44,35 +44,35 @@
 
 					<ul class="nav nav-list">
 						<li>
-							<a href="#">
+							<a href="<%=request.getContextPath()%>/servlet/ProvinceServlet?type=toIndex">
 								<i class="icon-dashboard"></i>
 								<span class="menu-text"> 首页 </span>
 							</a>
 						</li>
 
 						<li>
-							<a href="<%=request.getContextPath()%>/servlet/ProvinceServlet?type=toUserManage"">
+							<a href="<%=request.getContextPath()%>/servlet/ProvinceServlet?type=toUserManage">
 								<i class="icon-text-width"></i>
 								<span class="menu-text"> 用户管理 </span>
 							</a>
 						</li>
 
 						<li>
-							<a href="<%=request.getContextPath()%>/servlet/ProvinceServlet?type=toCityManage"" class="dropdown-toggle">
+							<a href="<%=request.getContextPath()%>/servlet/ProvinceServlet?type=toCityManage" class="dropdown-toggle">
 								<i class="icon-desktop"></i>
 								<span class="menu-text"> 市区管理 </span>
 							</a>
 						</li>
 
 						<li>
-							<a href="<%=request.getContextPath()%>/servlet/ProvinceServlet?type=toSubjectManage"" class="dropdown-toggle">
+							<a href="<%=request.getContextPath()%>/servlet/ProvinceServlet?type=toSubjectManage" class="dropdown-toggle">
 								<i class="icon-list"></i>
 								<span class="menu-text"> 科目管理 </span>
 							</a>
 						</li>
 
 						<li>
-							<a href="<%=request.getContextPath()%>/servlet/ProvinceServlet?type=toProjectManage"" class="dropdown-toggle">
+							<a href="<%=request.getContextPath()%>/servlet/ProvinceServlet?type=toProjectManage" class="dropdown-toggle">
 								<i class="icon-edit"></i>
 								<span class="menu-text"> 项目管理 </span>
 							</a>

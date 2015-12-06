@@ -17,7 +17,7 @@
     <link rel="StyleSheet" href="<%=request.getContextPath() %>/css/p2.css" type="text/css" />
 </head>
 <body onload="javascript:county_projectTotal();">
-    <div class="container">
+
         <jsp:include page="/public/top.jsp"></jsp:include>
         <div class="projectRight">
         	<div class="handle">
@@ -96,9 +96,7 @@
                 	<td class="percentTotal"></td>
                 </tr>
             </table>
-        </div>
-        <jsp:include page="/public/bottom.jsp"></jsp:include>
-    </div>
+
 
     <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-ui.min.js"></script>

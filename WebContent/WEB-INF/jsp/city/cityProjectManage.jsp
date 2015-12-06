@@ -17,7 +17,7 @@
     <link rel="StyleSheet" href="<%=request.getContextPath() %>/css/p2.css" type="text/css" />
 </head>
 <body>
-    <div class="container">
+   
         <jsp:include page="/public/top.jsp"></jsp:include>
         <div class="projectRight">
             <div class="handle">
@@ -102,8 +102,7 @@
                 </c:forEach>
             </table>
         </div>
-        <jsp:include page="/public/bottom.jsp"></jsp:include>
-    </div>
+
     
     <div id="gray" class="addProvinceProjectGray"></div>
     <div id="addCityProject" class="pop2">

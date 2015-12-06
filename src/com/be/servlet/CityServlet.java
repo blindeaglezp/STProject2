@@ -61,6 +61,7 @@ public class CityServlet extends HttpServlet {
 		String type = request.getParameter("type");
 		
 		switch (type) {
+		case "toIndex" : toIndex(request,response);break;
 		case "toUserManage" : toUserManage(request, response); break;
 		case "toCountyManage" : toCountyManage(request, response); break;
 		case "toCountyProjectManage" : toCountyProjectManage(request, response); break;
@@ -77,10 +78,29 @@ public class CityServlet extends HttpServlet {
 
 	}
 
+	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
+	
+	/**
+	 * 跳转到首页
+	 * @author gaohailong
+	 * @param request
+	 * @param response
+	 * @return void
+	 */
+	private void toIndex(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			request.getRequestDispatcher("/WEB-INF/jsp/city/functionShow.jsp").forward(request, response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}	
 	
 	/**
 	 * 跳转到用户管理界面
