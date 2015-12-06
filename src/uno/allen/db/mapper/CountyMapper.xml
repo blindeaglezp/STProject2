@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="uno.allen.db.mapper.CountyMapper">
+	<insert id="insertCounty" parameterType="uno.allen.entity.County">
+		insert into county
+		(
+		city_fk,county_name
+		)
+		values
+		(
+		#{City_FK},#{County_Name}
+		)
+	</insert>
+	<select id="getAllCountyByCityID" resultType="uno.allen.entity.County">
+		select * from county where city_fk = #{City_FK}
+	</select>
+	<select id="getAllCountyByCountyID" resultType="uno.allen.entity.County">
+		select * from county where county_id = #{County_ID}
+	</select>
+	<select id="getAllCountyByCountyName" resultType="uno.allen.entity.County">
+		select * from county where county_name = #{County_Name}
+	</select>
+	<select id="getAllCounty" resultType="uno.allen.entity.County">
+		select * from county
+	</select>
+	<delete id="deleteCounty" parameterType ="uno.allen.entity.County">
+		delete from county where county_name = #{County_Name}
+	</delete>
+</mapper>

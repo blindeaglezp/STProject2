@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="uno.allen.db.mapper.ProvinceProjectMapper">
+	<insert id="insertProvinceProject" parameterType="uno.allen.entity.ProvinceProject">
+		insert into province_project
+		(
+		province_rfc_ppfk,city_name_ppfk,subject_ppfk,project_name,total_budget,centre_budget,
+		province_budget,city_local_rfc_ppfk,city_local_budget,city_local_cost,city_local_percent,
+		county_rfc_ppfk,county_budget,county_cost,county_percent
+		)
+		values 
+		(
+		#{Province_RFC_PPFK},#{City_Name_PPFK},#{Subject_PPFK},#{Project_Name},#{Total_Budget},
+		#{Centre_Budget},#{Province_Budget},#{City_Local_RFC_PPFK},#{City_Local_Budget},#{City_Local_Cost},
+		#{City_Local_Percent},#{County_RFC_PPFK},#{County_Budget},#{County_Cost},#{County_Percent}
+		)
+	</insert>
+	
+	<update id="updateProvinceProject" parameterType ="uno.allen.entity.ProvinceProject">
+		update province_project set subject_ppfk = #{Subject_PPFK} , total_budget = #{Total_Budget}, centre_budget=#{Centre_Budget},
+		province_budget = #{Province_Budget}, city_local_rfc_ppfk = #{City_Local_RFC_PPFK}, city_local_budget = #{City_Local_Budget}, city_local_cost = #{City_Local_Cost}, 
+		city_local_percent = #{City_Local_Percent}, county_rfc_ppfk = #{County_RFC_PPFK}, county_budget = #{County_Budget} ,county_cost=#{County_Cost}, county_percent=#{County_Percent} 
+		where province_rfc_ppfk=#{Province_RFC_PPFK} and city_name_ppfk = #{City_Name_PPFK} and project_name = #{Project_Name}
+	</update>
+	
+	<select id="getAllProvinceProject" resultType="uno.allen.entity.ProvinceProject">
+		select * from province_project
+	</select>
+	<select id="getProvinceProjectByRfc" resultType="uno.allen.entity.ProvinceProject">
+		select * from province_project where province_rfc_ppfk = #{Province_RFC_PPFK}
+	</select>
+	<select id="getProvinceProjectBySubjectName" resultType="uno.allen.entity.ProvinceProject">
+		select * from province_project where subject_ppfk = #{Subject_PPFK}
+	</select>
+	<select id="getProvinceProjectByProjectName" resultType="uno.allen.entity.ProvinceProject">
+		select * from province_project where project_name = #{Project_Name}
+	</select>
+	<select id="getProvinceProjectByCityName" resultType="uno.allen.entity.ProvinceProject">
+		select * from province_project where city_name_ppfk = #{City_Name_PPFK}
+	</select>
+	
+	<select id="getProvinceProjectByRfcCityName" resultType="uno.allen.entity.ProvinceProject">
+		select * from province_project where province_rfc_ppfk = #{Province_RFC_PPFK} and city_name_ppfk = #{City_Name_PPFK}
+	</select>
+	<select id="getProvinceProjectByRfcSubject" resultType="uno.allen.entity.ProvinceProject">
+		select * from province_project where province_rfc_ppfk = #{Province_RFC_PPFK} and subject_ppfk = #{Subject_PPFK}
+	</select>
+	<select id="getProvinceProjectByCityNameSubject" resultType="uno.allen.entity.ProvinceProject">
+		select * from province_project where city_name_ppfk = #{City_Name_PPFK} and subject_ppfk = #{Subject_PPFK}
+	</select>
+	<select id="getProvinceProjectByRfcCityNameSubject" resultType="uno.allen.entity.ProvinceProject">
+		select * from province_project where province_rfc_ppfk = #{Province_RFC_PPFK} and city_name_ppfk = #{City_Name_PPFK} and subject_ppfk = #{Subject_PPFK}
+	</select>
+	
+	<delete id="deleteProvinceProject" parameterType ="uno.allen.entity.ProvinceProject">
+		delete from province_project where project_name = #{Project_Name}
+	</delete>
+</mapper>

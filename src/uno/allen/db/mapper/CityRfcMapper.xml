@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="uno.allen.db.mapper.CityRfcMapper">
+	<insert id="insertCityRfc" parameterType="uno.allen.entity.CityRfc">
+		insert into city_rfc
+		(
+		city_fk_rfc,city_rfc,sbj_id_pfk,sbj_name_pfk,county_name
+		)
+		values 
+		(
+		#{City_FK_RFC},#{City_RFC},#{SBJ_ID_PFK},#{SBJ_Name_PFK},#{County_Name}
+		)
+	</insert>
+	<select id="getCityRfcByCityID" resultType="uno.allen.entity.CityRfc">
+		select * from city_rfc where city_fk_rfc = #{City_FK_RFC}
+	</select>
+	<select id="getCityRfcByCityRfc" resultType="uno.allen.entity.CityRfc">
+		select * from city_rfc where city_rfc = #{City_RFC}
+	</select>
+	<select id="getCityRfcByCountyName" resultType="uno.allen.entity.CityRfc">
+		select * from city_rfc where county_name = #{County_Name}
+	</select>
+	<select id="getCityRfcBySbjID" resultType="uno.allen.entity.CityRfc">
+		select * from city_rfc where sbj_id_pfk = #{SBJ_ID_PFK}
+	</select>
+	<select id="getCityRfcBySbjName" resultType="uno.allen.entity.CityRfc">
+		select * from city_rfc where sbj_name_pfk = #{SBJ_Name_PFK}
+	</select>
+	<delete id="deleteCityRFC" parameterType ="uno.allen.entity.CityRfc">
+		delete from city_rfc where city_rfc = #{City_RFC}
+	</delete>
+</mapper>

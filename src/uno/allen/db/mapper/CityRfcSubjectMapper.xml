@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="uno.allen.db.mapper.CityRfcSubjectMapper">
+	<insert id="insertCityRfcSubject" parameterType="uno.allen.entity.CityRfcSubject">
+		insert into city_project
+		(
+		city_rfc,subject_id,subject_name
+		)
+		values
+		(
+		#{City_Rfc},#{Subject_ID},#{Subject_Name}	
+		)
+	</insert>
+	<select id="getByCityRfcSubID" resultType="uno.allen.entity.CityRfcSubject">
+		select * from city_project where city_rfc = #{City_Rfc} subject_id = #{Subject_ID}
+	</select>
+	<select id="getByCityRfcSubName" resultType="uno.allen.entity.CityRfcSubject">
+		select * from city_project where city_rfc = #{City_Rfc} subject_id = #{Subject_ID}
+	</select>
+	
+</mapper>

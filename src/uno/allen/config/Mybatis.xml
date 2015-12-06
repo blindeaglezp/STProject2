@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<properties>
+		<property name="myBatisDriver" value="com.mysql.jdbc.Driver" />
+		<property name="myBatisUrl" value="jdbc:mysql://127.0.0.1:3306/manage_system?useUnicode=true&amp;characterEncoding=utf8" />
+	</properties>
+
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${myBatisDriver}" />
+				<property name="url" value="${myBatisUrl}" />
+				<property name="username" value="root" />
+				<!--MarkForDBPassword--><property name="password" value="123456" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<mappers>
+		<mapper resource="uno/allen/db/mapper/CityMapper.xml"/>
+		<mapper resource="uno/allen/db/mapper/CityProjectMapper.xml"/>
+		<mapper resource="uno/allen/db/mapper/CityRfcMapper.xml"/>
+		<mapper resource="uno/allen/db/mapper/CountyMapper.xml"/>
+		<mapper resource="uno/allen/db/mapper/CountyRfcMapper.xml"/>
+		<mapper resource="uno/allen/db/mapper/ProvinceProjectMapper.xml"/>
+		<mapper resource="uno/allen/db/mapper/ProvinceRfcMapper.xml"/>
+		<mapper resource="uno/allen/db/mapper/SubjectMapper.xml"/>
+		<mapper resource="uno/allen/db/mapper/TownMapper.xml"/>
+		<mapper resource="uno/allen/db/mapper/TownRfcMapper.xml"/>
+		<mapper resource="uno/allen/db/mapper/UserMapper.xml"/>
+	</mappers>
+</configuration>

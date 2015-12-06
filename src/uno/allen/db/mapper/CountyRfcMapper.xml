@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="uno.allen.db.mapper.CountyRfcMapper">
+	<insert id="insertCountyRfc" parameterType="uno.allen.entity.CountyRfc">
+		insert into county_rfc
+		(
+		county_fk_rfc,county_rfc,sbj_id_countyfk,sbj_name_countyfk,town_name
+		)
+		values 
+		(
+		#{County_FK_RFC},#{County_RFC},#{SBJ_ID_CountyFK},#{SBJ_Name_CountyFK},#{Town_Name}
+		)
+	</insert>
+	<select id="getCountyRfcByRfc" resultType="uno.allen.entity.CountyRfc">
+		select * from county_rfc where county_rfc = #{County_RFC}
+	</select>
+	<select id="getCountyRfcByCountyID" resultType="uno.allen.entity.CountyRfc">
+		select * from county_rfc where county_fk_rfc = #{County_FK_RFC}
+	</select>
+	<select id="getCountyRfcBySubjectID" resultType="uno.allen.entity.CountyRfc">
+		select * from county_rfc where sbj_id_countyfk = #{SBJ_ID_CountyFK}
+	</select>
+	<select id="getCountyRfcBySubjectName" resultType="uno.allen.entity.CountyRfc">
+		select * from county_rfc where sbj_name_countyfk = #{SBJ_Name_CountyFK}
+	</select>
+	<delete id="deleteCountyRfc" parameterType ="uno.allen.entity.CountyRfc">
+		delete from county_rfc where county_rfc = #{County_RFC}
+	</delete>
+</mapper>

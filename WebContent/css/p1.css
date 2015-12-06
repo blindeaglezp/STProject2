@@ -1,0 +1,111 @@
+/*
+ * author:blindeagle
+ * version:1.0
+ * date:2015.11.29
+ */
+
+*{margin:0;padding:0;}
+a{text-decoration:none;color:#111;}
+li{list-style:none;}
+body{background:#FFF;font-size:14px;font-family:"微软雅黑";color:#666;}
+.container{width:1080px;height:768px;margin:0 auto;}
+.clear{clear:both;}
+
+/* start top */
+.top{width:100%;height:100px;background:#369CDC;border-bottom:1px solid #CCC;font-weight:bold;font-size:40px;
+	line-height:100px;color:#FFF;}
+/* top end */
+
+/* start left */
+.left{width:200px;height:500px;padding:10px 20px;float:left;border-right:1px solid #CCC;border-bottom:1px solid #CCC;
+	background:#EEE;}
+/* left end */
+
+/* start bottom */
+.bottom{width:100%;height:146px;background:#369CDC;}
+/* bottom end */
+
+/* start right */
+.right{width:839px;height:520px;float:left;border-bottom:1px solid #CCC;overflow: scroll;}
+.right .ul_function{width:500px;height:500px;margin:0 auto;}
+.right .ul_function li{width:150px;border-radius:50%;border:1px solid red;display:block;text-align:center;
+	line-height:150px;float:left;margin:45px 45px;background:#7EB6ED;}
+.right .ul_function li a{width:150px;border-radius:50%;line-height:150px;display:block;font-size:20px;}	
+.right .handle{width:100%;height:50px;text-align:right;line-height:50px;border-bottom:1px solid #CCC;background:#BFE9F7;}
+.right .handle select{float:left;width:70px;height:25px;margin:10px 20px;background:#067CC2;color:#FFF;}
+.right .handle select:nth-child(1){margin-left:70px;}
+.right .handle button{margin-right:20px;border:none;background:#067CC2;color:#FFF;padding:5px;cursor:pointer;
+    border-radius:3px;}
+.right table{border-collapse:collapse;text-align:center;margin:50px auto 30px;}
+.right table tr th{padding:5px 10px;}
+.right table tr:nth-child(2n-1){background:#F2F9FF;}
+.right table tr:nth-child(2n){background:#D7EDFF;}
+.right table tr td{padding:5px 20px;}
+.right table tr td button{border:none;background:#FFF;text-decoration:underline;cursor:pointer;}
+.right table tr td button:hover{color:blue;}
+/* right end */
+
+/* start pop */
+#gray{width:100%;height:100%;background:rgba(0,0,0,0.5);position:fixed;top:0px;display:none;}
+.pop{width:400px;height:300px;background:#FFF;position:absolute;left:400px;top:150px;display:none;}
+.pop .title{width:400px;height:45px;background:#FF9933;color:#FFF;font-size:18px;font-family:"微软雅黑";line-height:45px;
+    text-indent:35px;cursor:pointer;}
+.pop .title a{color:#DDD;font-size:24px;text-decoration:none;float:right;margin-right:10px;}
+.pop .title a:hover{color:#FFF;}
+.pop .content{width:315px;height:190px;margin:15px auto 0px;}
+.pop .content .empty_f{width:100%;height:30px;}
+.pop .content p{font-size:16px;font-family:"微软雅黑";margin-bottom:15px;}
+.pop .content p input.txt{width:260px;height:35px;border:1px solid #DDD;border-radius:3px;padding:0 5px;}
+/* pop end */
+
+/* start addUser */
+#addUser .content .sel_city{margin:0 0 20px;}
+#addUser .content .empty_f{height:0;}
+#addUser .content input.btn_submit{width:305px;height:35px;background:#CCC;border:none;margin-top:20px;border-radius:3px;
+    cursor:pointer;}
+/* addUser end */
+
+/* start addCity */
+#addCity .content input.btn_submit{width:305px;height:35px;background:#CCC;border:none;margin-top:20px;border-radius:3px;
+    cursor:pointer;}
+/* addCity end */
+
+/* start updateCity */
+#updateCity .content input.btn_submit{width:305px;height:35px;background:#CCC;border:none;margin-top:20px;border-radius:3px;
+    cursor:pointer;}
+/* updateCity end */
+
+/* start addSubject */
+#addSubject{height:400px;}
+#addSubject .content select{width:82px;height:25px;margin:-10px 10px 30px;}
+#addSubject .content input.btn_submit{width:305px;height:35px;background:#CCC;border:none;margin-top:20px;border-radius:3px;
+    cursor:pointer;}
+/* addSubject end */
+
+/* start addCounty */
+#addCounty .content input.btn_submit{width:305px;height:35px;background:#CCC;border:none;margin-top:20px;border-radius:3px;
+    cursor:pointer;}
+/* addCounty end */
+
+/* start addCountyUser */
+#addCountyUser .content .sel_city{margin:0 0 20px;}
+#addCountyUser .content .empty_f{height:0;}
+#addCountyUser .content input.btn_submit{width:305px;height:35px;background:#CCC;border:none;margin-top:20px;border-radius:3px;}
+/* addCountyUser end */
+
+/* start projectRight */
+.projectRight{widht:1080px;height:520px;background:#CCC;}
+.projectRight .handle{width:100%;height:50px;text-align:right;line-height:50px;border-bottom:1px solid #CCC;}
+.projectRight .handle select{float:left;width:80px;height:25px;margin:10px 20px;}
+.projectRight .handle select:nth-child(1){margin-left:70px;}
+.projectRight .handle button{margin-right:20px;border:none;background:#067CC2;color:#FFF;padding:5px;cursor:pointer;
+    border-radius:3px;}
+.projectRight table{width:1080px;border-collapse:collapse;text-align:center;margin:0 auto 30px;
+	table-layout:fixed;word-break: break-all; word-wrap: break-word;}
+.projectRight table tr th{padding:5px 10px;}
+.projectRight table tr td{padding:5px 20px;}
+.projectRight table tr td button{border:none;background:#FFF;text-decoration:underline;cursor:pointer;}
+.projectRight table tr td button:hover{color:blue;}
+/* projectRight end */
+
+

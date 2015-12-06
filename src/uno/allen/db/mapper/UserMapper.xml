@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="uno.allen.db.mapper.UserMapper">
+	<insert id="insertUser" parameterType="uno.allen.entity.User">
+		insert into user
+		(
+		user_city_name,user_county_name,user_name,user_password,user_level
+		)
+		values 
+		(
+		#{User_City_Name},#{User_County_Name},#{User_Name},#{User_Password},#{User_Level}
+		)
+	</insert>
+	
+	<select id="getUserByUserName" resultType="uno.allen.entity.User">
+		select * from user where user_name = #{User_Name}
+	</select>
+	<select id="getUserByCityName" resultType="uno.allen.entity.User">
+		select * from user where user_city_name = #{User_City_Name}
+	</select>
+	<select id="getUserByCountyName" resultType="uno.allen.entity.User">
+		select * from user where user_county_name = #{User_County_Name}
+	</select>
+	<select id="getUserByUserLevel" resultType="uno.allen.entity.User">
+		select * from user where user_level = #{User_Level}
+	</select>
+	<select id="getAllUser" resultType="uno.allen.entity.User">
+		select * from user
+	</select>
+	<delete id="deleteUser" parameterType ="uno.allen.entity.User">
+		delete from user where user_name = #{User_Name}
+	</delete>
+</mapper>

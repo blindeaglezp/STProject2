@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="uno.allen.db.mapper.ProvinceRfcMapper">
+	<insert id="insertProvinceRfc" parameterType="uno.allen.entity.ProvinceRfc">
+		insert into province_rfc
+		(
+		province_rfc,sbj_id_cityfk,sbj_name_cityfk,city_name
+		)
+		values
+		(
+		#{Province_RFC},#{SBJ_ID_CITYFK},#{SBJ_Name_CITYFK},#{City_Name}
+		)
+	</insert>
+	<select id="getAllProvinceRfc" resultType="uno.allen.entity.ProvinceRfc">
+		select * from province_rfc
+	</select>
+	<select id="getProvinceRfcByRfc" resultType="uno.allen.entity.ProvinceRfc">
+		select * from province_rfc where province_rfc = #{Province_RFC}
+	</select>
+	<select id="getProvinceRfcByCityName" resultType="uno.allen.entity.ProvinceRfc">
+		select * from province_rfc where city_name = #{City_Name}
+	</select>
+	<select id="getProvinceRfcBySubjectID" resultType="uno.allen.entity.ProvinceRfc">
+		select * from province_rfc where sbj_id_cityfk = #{SBJ_ID_CITYFK}
+	</select>
+	<select id="getProvinceRfcBySubjectName" resultType="uno.allen.entity.ProvinceRfc">
+		select * from province_rfc where sbj_name_cityfk = #{SBJ_Name_CITYFK}
+	</select>
+	<update id="updateProvinceRfc" parameterType ="uno.allen.entity.ProvinceRfc">
+		update province_rfc set province_rfc=#{Province_RFC},sbj_id_cityfk=#{SBJ_ID_CITYFK},
+		sbj_name_cityfk=#{SBJ_Name_CITYFK},city_name=#{City_Name} where province_rfc = #{Province_RFC}
+	</update>
+	<delete id="deleteProvinceRfc" parameterType ="uno.allen.entity.ProvinceRfc">
+		delete from province_rfc where province_rfc = #{Province_RFC}
+	</delete>
+</mapper>

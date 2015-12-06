@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="uno.allen.db.mapper.CityMapper">
+	<insert id="insertCity" parameterType="uno.allen.entity.City">
+		insert into city
+		(
+		city_name
+		)
+		values 
+		(
+		#{City_Name}
+		)
+	</insert>
+	
+	<select id="getCityByName" resultType="uno.allen.entity.City">
+		select * from city where city_name = #{City_Name}
+	</select>
+	<select id="getCityByID" resultType="uno.allen.entity.City">
+		select * from city where city_id = #{City_ID}
+	</select>
+	<select id="getAllCity" resultType="uno.allen.entity.City">
+		select * from city
+	</select>
+	<delete id="deleteCity" parameterType ="uno.allen.entity.City">
+		delete from city where city_name = #{City_Name}
+	</delete>
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="uno.allen.db.mapper.SubjectMapper">
+	<insert id="insertSubject" parameterType="uno.allen.entity.Subject">
+		insert into subject
+		(
+		sbj_class,sbj_regulation,sbj_item,sbj_id,sbj_name
+		)
+		values 
+		(
+		#{SBJ_Class},#{SBJ_Regulation},#{SBJ_Item},#{SBJ_ID},#{SBJ_Name}
+		)
+	</insert>
+	
+	<select id="getSubjectByID" resultType="uno.allen.entity.Subject">
+		select * from subject where sbj_id = #{SBJ_ID}
+	</select>
+	<select id="getAllSubject" resultType="uno.allen.entity.Subject">
+		select * from subject
+	</select>
+	<select id="getSubjectByClass" resultType="uno.allen.entity.Subject">
+		select * from subject where sbj_class = #{SBJ_Class}
+	</select>
+	<select id="getSubjectByRegulation" resultType="uno.allen.entity.Subject">
+		select * from subject where sbj_regulation = #{SBJ_Regulation}
+	</select>
+	<select id="getSubjectByItem" resultType="uno.allen.entity.Subject">
+		select * from subject where sbj_item = #{SBJ_Item}
+	</select>
+	<select id="getSubjectByName" resultType="uno.allen.entity.Subject">
+		select * from subject where sbj_name = #{SBJ_Name}
+	</select>
+	<delete id="deleteSubject" parameterType ="uno.allen.entity.Subject">
+		delete from subject where sbj_name = #{SBJ_Name}
+	</delete>
+</mapper>
