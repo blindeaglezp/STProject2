@@ -19,6 +19,7 @@
 <body onload="javascript:projectTotal();">
         <jsp:include page="/public/top.jsp"></jsp:include>
         <jsp:include page="/public/provinceLeft.jsp"></jsp:include>
+        <div class="right">
         <div class="projectRight">
         	<select class="sel_allCity pp_sel" onChange="queryCountyByCity();">
         		<option value="0" selected>选择市</option>
@@ -43,10 +44,10 @@
            	</select>
            	<input placeholder="文号" style="margin-top:10px;" class="provinceRfc" type="text"/>
         	<input placeholder="项目名" style="margin:10px 0 0 10px;" class="projectName" type="text"/>
-            <div class="handle">
-            	<button type="button" class="queryProjectByCondition">查询</button>
-                <button type="button" class="addProvinceProject">添加项目</button>
-            </div>
+               <div class="handle">
+            	<button type="button" class="queryProjectByCondition" >查询</button>
+                <button type="button" class="addProvinceProject" >添加项目</button>
+           </div>
             <table border="1" class="tab_provinceProject">
                 <tr>
                     <th rowspan="2"></th>
@@ -174,7 +175,7 @@
 	        <input type="button" class="btn_addProvinceProject btn_submit" value="提交"/>
         </div>
     </div>
-
+	</div>
     <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/js/dtree.js"></script>

@@ -78,7 +78,8 @@ public class CountyServlet extends HttpServlet {
 	private void updateCountyProject(HttpServletRequest request, HttpServletResponse response) {
 		String cityRfc = request.getParameter("cityRfc");
 		String projectName = request.getParameter("projectName");
-		String countyName = request.getParameter(countyName);
+	
+		String countyName = request.getParameter("countyName");
 		int cost = Integer.parseInt(request.getParameter("cost"));
 		cityProjects = CityProjectOp.getCityProjectByCityRfc(cityRfc);
 		for (CityProject cp : cityProjects) {
