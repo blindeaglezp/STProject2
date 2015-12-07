@@ -28,7 +28,6 @@ body{background:#FFF;font-size:14px;font-family:"微软雅黑";color:#666;}
 
 /* start right */
 .right{	width:1000px;height:520px;float:left;border-bottom:1px solid #CCC;overflow: scroll;}
-.right_special{height:520px;float:left;border-bottom:1px solid #CCC;overflow: scroll;}
 .right .ul_function{width:500px;height:500px;margin:0 auto;}
 .right .ul_function li{width:150px;border-radius:50%;border:1px solid red;display:block;text-align:center;
 	line-height:150px;float:left;margin:45px 45px;background:#7EB6ED;}
@@ -110,6 +109,7 @@ body{background:#FFF;font-size:14px;font-family:"微软雅黑";color:#666;}
 .projectRight table tr td button{border:none;background:#FFF;text-decoration:underline;cursor:pointer;}
 .projectRight table tr td button:hover{color:blue;}
 /* projectRight end */
+
 
 
 
