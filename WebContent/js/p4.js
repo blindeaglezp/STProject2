@@ -191,7 +191,7 @@ $("#addProvinceProject .content .div_assign .add_assign").click(function() {
 });
 
 // 点击添加按钮，弹出添加省级项目的窗体
-$(".projectRight .handle .addProvinceProject").click(function() {
+$(".projectRight .addProvinceProject").click(function() {
 	$("#gray").show();
     $("#addProvinceProject").show();
     setCenter();
