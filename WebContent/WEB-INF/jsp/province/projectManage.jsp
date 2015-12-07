@@ -22,7 +22,7 @@
 <body onload="javascript:projectTotal();">
 	<jsp:include page="/public/top.jsp"></jsp:include>
 	<jsp:include page="/public/provinceLeft.jsp"></jsp:include>
-	<div class="right_special">
+	<div class="right">
 		<div class="projectRight">
 			<select class="sel_allCity pp_sel" onChange="queryCountyByCity();">
 				<option value="0" selected>选择市</option>
@@ -113,7 +113,59 @@
 			<div class="title">
 				添加项目<a href="javascript:void(0);" class="close">X</a>
 			</div>
-			<div class="content">
+			<table class="table_province">
+				<tr>
+					<td id="text">文号：</td>
+					<td><input type="text" class="cityRfc txt"></td>
+
+					<td id="text">类：</td>
+					<td><input type="text" class="class txt"></td>
+				</tr>
+				<tr>
+					<td id="text">款：</td>
+					<td><input type="text" class="regulation txt"></td>
+
+					<td id="text">项：</td>
+					<td><input type="text" class="item txt"></td>
+				</tr>
+				<tr>
+					<td id="text">项目名：</td>
+					<td><input type="text" class="projectName txt"></td>
+					<td id="text">合计：</td>
+					<td><input type="text" class="totalBudget txt"></td>
+				</tr>
+				<tr>
+					<td id="text">中央：</td>
+					<td><input type="text" class="centreBudget txt"></td>
+					<td id="text">省级：</td>
+					<td><input type="text" class="provinceBudget txt" /></td>
+				</tr>
+				<tr>
+					<td id="text">省级预算：</td>
+					<td><input type="text" class="cityLocalBudget txt"></td>
+				</tr>
+
+				<tr>
+					<td id="text" class="add_assign">分配+</td>
+				</tr>
+
+				<tr>
+					<td id="text">市：</td>
+					<td><input type="text" class="city_assign"></td>
+					<td id="text">县：</td>
+					<td><input type="text" class="county_assign"></td>
+				</tr>
+				<tr>
+					<td>预算指标：</td>
+					<td><input type="text" class="other_budget"></td>
+				</tr>
+				<tr>
+					<td colspan=4 style="text-align: center;"><input type="button"
+						id="add_Project" class="btn_addProvinceProject btn_submit"
+						value="提交" /></td>
+				</tr>
+			</table>
+			<!-- <div class="content">
 				<div class="empty_f"></div>
 				<p>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 文号<input type="text"
@@ -171,7 +223,7 @@
 				</div>
 				<input type="button" class="btn_addProvinceProject btn_submit"
 					value="提交" />
-			</div>
+			</div> -->
 		</div>
 	</div>
 	<script type="text/javascript"

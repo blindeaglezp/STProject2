@@ -4,6 +4,7 @@
  * date:2015.11.29
  */
 
+
 /* start addCountyProject */
 #addCountyProject{height:550px;}
 #addCountyProject .content p{font-size:16px;font-family:"微软雅黑";margin-bottom:10px;}
@@ -18,7 +19,7 @@
 
 /* start pop2 */
 .pop2{width:650px;height:1200px;display:none;background:#FFF;position:absolute;}
-.pop2 .title{width:650px;height:45px;background:#FF9933;color:#FFF;font-size:18px;font-family:"微软雅黑";line-height:45px;
+.pop2 .title{width:650px;height:45px;background:#4e72b8;color:#FFF;font-size:18px;font-family:"微软雅黑";line-height:45px;
     text-indent:35px;cursor:pointer;}
 .pop2 .title a{color:#DDD;font-size:24px;text-decoration:none;float:right;margin-right:10px;}
 .pop2 .title a:hover{color:#FFF;}
@@ -38,5 +39,12 @@
 
 /* start addCityProject */
 .pop2 .content .div_assign{margin:300px 20px 10px;width:450px;}
+#addCityProject .table tr #text{text-align:right;margin:20px;}
+#addCityProject .table tr #add_CityProject{background:#438eb9;width:30%;height:30px;border-radius:3px;text-color:#ffffff;border:none;}
 /* addCityProject end */
+#addProvinceProject  .table_province tr {background:#fff;}
+#addProvinceProject  .table_province tr #add_Project{background:#438eb9;width:30%;height:30px;border-radius:3px;text-color:#ffffff;border:none;}
+
+
+
  
