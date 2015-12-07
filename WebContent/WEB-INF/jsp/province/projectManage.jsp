@@ -18,6 +18,7 @@
 </head>
 <body onload="javascript:projectTotal();">
         <jsp:include page="/public/top.jsp"></jsp:include>
+        <jsp:include page="/public/provinceLeft.jsp"></jsp:include>
         <div class="projectRight">
         	<select class="sel_allCity pp_sel" onChange="queryCountyByCity();">
         		<option value="0" selected>选择市</option>

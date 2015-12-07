@@ -89,10 +89,5 @@
 		<script src="<%=request.getContextPath() %>/assets/js/flot/jquery.flot.resize.min.js"></script>
 		<script src="<%=request.getContextPath() %>/assets/js/ace-elements.min.js"></script>
 		<script src="<%=request.getContextPath() %>/assets/js/ace.min.js"></script>
-        
-        
-        
-  
-
 </body>
 </html>

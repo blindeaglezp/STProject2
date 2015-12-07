@@ -19,6 +19,7 @@
 <body>
    
         <jsp:include page="/public/top.jsp"></jsp:include>
+        <jsp:include page="/public/cityLeft.jsp"></jsp:include>
         <div class="projectRight">
             <div class="handle">
             	<select class="sel_allPPFK pp_sel" onChange="queryProjectByProvinceRFC();">
