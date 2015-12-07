@@ -136,7 +136,6 @@
             	&nbsp;&nbsp;&nbsp;
             	支付数<input type="text" class="cityLocalCost txt"/>
             </p>
-            <p>支付进度<input type="text" class="cityLocalPercent txt"/></p>
             <div class="div_assign">
 	            <span class="title_assign">分配</span>
 	            <div class="add_assign">+</div><br/>	
