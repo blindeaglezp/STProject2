@@ -20,11 +20,11 @@ public class CityProjectDb {
 			session.close();
 		}
 	}
-	public static void deleteCityProject(String projectName) {
+	public static void deleteCityProject(String cityRfc,String projectName,String countyName) {
 		SqlSession session = DbTools.SQL_SESSION_FACTORY.openSession();
 		try {
 			CityProjectMapper mapper = session.getMapper(CityProjectMapper.class);
-			mapper.deleteCityProject(projectName);
+			mapper.deleteCityProject( cityRfc, projectName, countyName);
 			session.commit();
 		} catch (Exception e) {
 			System.out.print(e);

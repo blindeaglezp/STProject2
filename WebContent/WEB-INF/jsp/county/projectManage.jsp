@@ -25,7 +25,7 @@
             <table border="1" class="tab_countyProject">
                 <tr>
                     <th rowspan="2"></th>
-                    <th rowspan="2">项目文号</th>
+                    <th rowspan="2">省文号</th>
                     <th colspan="3">科目</th>
                     <th rowspan="2">项目名</th>
                     <th rowspan="2">预算指标</th>

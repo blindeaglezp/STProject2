@@ -5,7 +5,7 @@ import uno.allen.entity.CityProject;
 
 public interface CityProjectMapper {
 	void insertCityProject(CityProject cityProject);
-	void deleteCityProject(String projectName);
+	void deleteCityProject(String cityRfc,String projectName,String countyName);
 	void updateCityProject(CityProject cityProject);
 	List<CityProject> getAllCityProject();
 	List<CityProject> getCityProjectByCityRfc(String cityRfc);

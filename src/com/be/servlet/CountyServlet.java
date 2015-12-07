@@ -78,13 +78,14 @@ public class CountyServlet extends HttpServlet {
 	private void updateCountyProject(HttpServletRequest request, HttpServletResponse response) {
 		String cityRfc = request.getParameter("cityRfc");
 		String projectName = request.getParameter("projectName");
+		String countyName = request.getParameter(countyName);
 		int cost = Integer.parseInt(request.getParameter("cost"));
 		cityProjects = CityProjectOp.getCityProjectByCityRfc(cityRfc);
 		for (CityProject cp : cityProjects) {
 			System.out.println(cp.getCity_RFC_CPFK());
 			if (projectName.equals(cp.getProject_Name())) {
 				cityProjectObj = cp;
-				CityProjectOp.deleteCityProject(projectName);
+				CityProjectOp.deleteCityProject(cityRfc,projectName,countyName);
 				cityProjectObj.setCounty_Cost(cost);
 				CityProjectOp.insertCityProject(cityProjectObj);
 //				CityProjectOp.updateCityProject(cp);
