@@ -317,7 +317,6 @@ $(".btn_countyUpdate").click(function() {
 });
 
 $(".btn_updateCountyProject").click(function() {
-	alert(0);
 	var $content = $(this).parent();
 	var cityRfc = $content.find(".cityRfc").val();
 	var projectName = $content.find(".projectName").val();
