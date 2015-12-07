@@ -27,8 +27,8 @@ public class CityProjectOp {
 	public static List<CityProject> getCityProjectByProjectName(String projectName){
 		return CityProjectDb.getCityProjectByProjectName(projectName);
 	}
-	public static void deleteCityProject(String projectName){
-		CityProjectDb.deleteCityProject(projectName);
+	public static void deleteCityProject(String cityRfc,String projectName,String countyName){
+		CityProjectDb.deleteCityProject( cityRfc, projectName, countyName);
 	}
 	public static List<CityProject> getCityProjectByRfcSubject(String rfc,String subjectName){
 		return CityProjectDb.getCityProjectByRfcSubject(rfc, subjectName);
