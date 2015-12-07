@@ -123,9 +123,89 @@ public class ProvinceServlet extends HttpServlet {
 		String provinceRfc = request.getParameter("provinceRfc");
 		String projectName = request.getParameter("projectName");
 		cityProjects = CityProjectOp.getAllCityProject();
-		List<CityProject> result = new ArrayList<CityProject>();
+		if ((!"0".equals(cityName)) && "0".equals(countyName)) {
+			for (int i = 0; i < cityProjects.size(); i++) {
+				cityObj = CityOp.getCityByID(CountyOp.getAllCountyByCountyName(cityProjects.get(i).getCounty_name_CPFK()).get(0).getCity_FK());
+				if (!cityName.equals(cityObj.getCityName())) {
+					cityProjects.remove(i);
+					i--;
+				}
+			}
+		} else if (!"0".equals(countyName)) {
+			for (int i = 0; i < cityProjects.size(); i++) {
+				if (!countyName.equals(cityProjects.get(i).getCounty_name_CPFK())) {
+					cityProjects.remove(i);
+					i--;
+				}
+			}
+		}
+		if (!"0".equals(subClass) && "0".equals(subReg)) {
+			subjects = SubjectOp.getSubjectByClass(subClass);
+			for (int i = 0; i < cityProjects.size(); i++) {
+				for (Subject subject : subjects) {
+					if (subject.getSBJ_Name().equals(cityProjects.get(i).getSubject_Name_CPFK())) {
+						cityProjects.remove(i);
+						break;
+					}
+				}
+				i--;
+			}
+		} else if (!"0".equals(subReg) && "0".equals(subItem)) {
+			subjects = SubjectOp.getSubjectByRegulation(subReg);
+			for (int i = 0; i < cityProjects.size(); i++) {
+				for (Subject subject : subjects) {
+					if (subject.getSBJ_Name().equals(cityProjects.get(i).getSubject_Name_CPFK())) {
+						cityProjects.remove(i);
+						break;
+					}
+				}
+				i--;
+			}
+		} else if (!"0".equals(subItem)) {
+			subjects = SubjectOp.getSubjectByRegulation(subItem);
+			for (int i = 0; i < cityProjects.size(); i++) {
+				for (Subject subject : subjects) {
+					if (subject.getSBJ_Name().equals(cityProjects.get(i).getSubject_Name_CPFK())) {
+						cityProjects.remove(i);
+						break;
+					}
+				}
+				i--;
+			}
+		}
+		if (!"0".equals(provinceRfc)) {
+			for (int i = 0; i < cityProjects.size(); i++) {
+				if (provinceRfc.equals(cityProjects.get(i).getCity_RFC_CPFK())) {
+					cityProjects.remove(i);
+					i--;
+				}
+			}
+		}
+		if (!"0".equals(projectName)) {
+			for (int i = 0; i < cityProjects.size(); i++) {
+				if (projectName.equals(cityProjects.get(i).getProject_Name())) {
+					cityProjects.remove(i);
+					i--;
+				}
+			}
+		}
+		List<String> cityNames = new ArrayList<String>();
+		subjects = new ArrayList<Subject>();
 		for (CityProject project : cityProjects) {
-//			if (cityName != null && !"".equals(cityName) && cityName.equals(project.get))
+			subjectObj = SubjectOp.getSubjectByName(project.getSubject_Name_CPFK()).get(0);
+			subjects.add(subjectObj);
+			cityObj = CityOp.getCityByID(CountyOp.getAllCountyByCountyName(project.getCounty_name_CPFK()).get(0).getCity_FK());
+			cityNames.add(cityObj.getCityName());
+		}
+		List<Object> result = new ArrayList<Object>();
+		result.add(cityProjects);
+		result.add(cityNames);
+		result.add(subjects);
+		jsonArr = JSONArray.fromObject(result);
+		try {
+			response.getWriter().print(jsonArr);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -226,6 +306,7 @@ public class ProvinceServlet extends HttpServlet {
 		request.setAttribute("provinceProjects", provinceProjects);
 		request.setAttribute("provinceRfcs", provinceRfcs);
 		request.setAttribute("subjects", subjects);
+		request.setAttribute("subClasses", subClasses);
 		request.setAttribute("proSubjects", proSubjects);
 		request.setAttribute("cityProjects", cityProjects);
 		request.setAttribute("proCitys", proCitys);

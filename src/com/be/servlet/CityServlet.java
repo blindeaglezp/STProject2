@@ -385,7 +385,7 @@ public class CityServlet extends HttpServlet {
 	 */
 	private void addCityProject(HttpServletRequest request, HttpServletResponse response) {
 		userSession = (User) request.getSession().getAttribute("user");
-		
+		System.out.println(userSession);
 		// 获取数据
 		
 		String provinceRfc = request.getParameter("cityRfc");
@@ -401,6 +401,18 @@ public class CityServlet extends HttpServlet {
 		
 		String cityAndCounty = request.getParameter("cityAndCounty");
 		
+		System.out.println("provinceRfc:" + provinceRfc);
+		System.out.println("subClass:" + subClass);
+		System.out.println("regulation:" + regulation);
+		System.out.println("item:" + item);
+		System.out.println("projectName:" + projectName);
+		System.out.println("totalBudget:" + totalBudget);
+		System.out.println("cityLocalBudget:" + cityLocalBudget);
+		System.out.println("cityLocalCost:" + cityLocalCost);
+		System.out.println("cityLocalPercent:" + cityLocalPercent);
+		System.out.println("cityAndCounty:" + cityAndCounty);
+		
+		
 		//　拆分字符串
 		String[] cityAndCountys = cityAndCounty.split(",");
 		for (String cc : cityAndCountys) {
@@ -409,17 +421,18 @@ public class CityServlet extends HttpServlet {
 			if ((cs[0] != null && !"".equals(cs[0]))) {
 				// 封装对象
 				cityProjectObj = new CityProject();
-	//						cityProjectObj.setCity_RFC_CPFK(cityRfc);
+				cityProjectObj.setCity_RFC_CPFK(provinceRfc);
 				cityProjectObj.setSubject_Name_CPFK(subjectObj.getSBJ_Name());
 				cityProjectObj.setCounty_name_CPFK(cs[0]);
+				cityProjectObj.setTotal_Budget(totalBudget);
 				cityProjectObj.setProjec_Name(projectName);
-				if (cs[1] != null && "".equals(cs[1])) {
+				if (cs[1] != null && !"".equals(cs[1])) {
 					cityProjectObj.setCounty_Budget(Integer.parseInt(cs[1]));
 				}
-				if (cs[2] != null && "".equals(cs[2])) {
+				if (cs[2] != null && !"".equals(cs[2])) {
 					cityProjectObj.setCounty_Cost(Integer.parseInt(cs[2]));
 				}
-				if (cs[3] != null && "".equals(cs[3])) {
+				if (cs[3] != null && !"".equals(cs[3])) {
 					cityProjectObj.setCounty_Cost(Integer.parseInt(cs[3]));
 				}
 				CityProjectOp.insertCityProject(cityProjectObj);

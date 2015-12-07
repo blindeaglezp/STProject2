@@ -104,19 +104,6 @@
 						</td>
 					</tr>
 				</c:forEach>
-				<tr class="tab_count">
-					<td>合计</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td class="budgetTotal"></td>
-					<td class="costTotal"></td>
-					<td class="percentTotal"></td>
-				</tr>
 			</table>
 		</div>
 

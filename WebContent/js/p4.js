@@ -13,9 +13,9 @@ function projectTotal() {
 	$(".tab_provinceProject .tab_content .countyCost").each(function() {
 		costTotal += parseInt($(this).html());
 	});
-	$(".tab_provinceProject .tab_count .budgetTotal").html(budgetTotal);
-	$(".tab_provinceProject .tab_count .costTotal").html(costTotal);
-	$(".tab_provinceProject .tab_count .percentTotal").html((costTotal / budgetTotal * 100).toFixed(2) + "%");
+	$(".tab_provinceProject").append("<tr class='tab_count'><td>合计</td><td></td><td></td>" +
+		"<td></td><td></td><td></td><td></td><td></td><td class='budgetTotal'>"+budgetTotal+"</td>" +
+		"<td class='costTotal'>"+costTotal+"</td><td class='percentTotal'>"+(costTotal/budgetTotal*100).toFixed(2) +"%</td></tr>");
 }
 
 //县级统计项目
@@ -33,7 +33,7 @@ function county_projectTotal() {
 }
 
 // 根据条件查询市项目
-function queryProjectByCondition() {
+$(".queryProjectByCondition").click(function queryProjectByCondition() {
 	var cityName, countyName, subClass, subReg, subItem, provinceRfc, projectName;
 	$(".projectRight .sel_allCity option").each(function() {
 		if (this.selected) {
@@ -70,14 +70,25 @@ function queryProjectByCondition() {
 		dataType:"json",
 		data:data,
 		success:function(data){
-			var $county = $(".projectRight .sel_allCounty");
-			$county.find("option.content").remove();
-			$(data).each(function() {
-				$county.append("<option class='content' value='"+this.county_Name+"'>"+this.county_Name+"</option>");
+			var $project = $(".projectRight .tab_provinceProject");
+			$project.find("tr.tab_content").remove();
+			$project.find("tr.tab_count").remove();
+			var i = 1;
+			$(data[0]).each(function() {
+				$project.append("<tr class='tab_content'><td>"+i+"</td>" +
+					"<td>"+data[1][i-1]+"</td><td>"+this.county_name_CPFK+"</td>" +
+					"<td>"+this.city_RFC_CPFK+"</td><td>"+data[2][i-1].SBJ_Class+"</td>" +
+					"<td>"+data[2][i-1].SBJ_Regulation+"</td><td>"+data[2][i-1].SBJ_Item+"</td>" +
+					"<td>"+this.project_Name+"</td><td class='countyBudget'>"+this.county_Budget+"</td>" +
+					"<td class='countyCost'>"+this.county_Cost+"</td><td>"+this.county_Percent+"</td>" +
+					"<td><button type='button'>删除</button> | <button type='button'>修改</button></td></tr>");
+				i++;
 			});
+			projectTotal();
 		}
 	});
-}
+});
+
 
 // 根据市名查询县
 function queryCountyByCity() {
