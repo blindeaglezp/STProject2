@@ -149,6 +149,7 @@
 					<td id="text" class="add_assign">分配+</td>
 				</tr>
 
+				<div class="item_assign">
 				<tr>
 					<td id="text">市：</td>
 					<td><input type="text" class="city_assign"></td>
@@ -159,6 +160,7 @@
 					<td>预算指标：</td>
 					<td><input type="text" class="other_budget"></td>
 				</tr>
+				</div>
 				<tr>
 					<td colspan=4 style="text-align: center;"><input type="button"
 						id="add_Project" class="btn_addProvinceProject btn_submit"

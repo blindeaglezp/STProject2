@@ -22,41 +22,32 @@
         <div class="projectRight">
         	<div class="handle">
         		<select class="sel_allCounty pp_sel" onChange="queryProjectByCondition();">
-	        		<option disabled selected>选择县</option>
-	        		<c:forEach items="${citys }" var="city">
-	        			<option value="${city.cityName }">${city.cityName }</option>
+	        		<option value="0" selected>选择县</option>
+	        		<c:forEach items="${countys }" var="county">
+	        			<option value="${county.county_Name }">${county.county_Name }</option>
 	        		</c:forEach>
 	        	</select>
-	        	<select class="sel_allPPFK pp_sel" onChange="queryProjectByCondition();">
-	        		<option disabled selected>选择文号</option>
-	        		<c:forEach items="${provinceRfcs }" var="rfc">
-	        			<option value="${rfc.province_RFC }">${rfc.province_RFC }</option>
-	        		</c:forEach>
-	        	</select>
-	        	<select class="sel_allProName pp_sel" onChange="queryProjectByCondition();">
-	        		<option disabled selected>选择项目</option>
-	        		<c:forEach items="${provinceRfcs }" var="rfc">
-	        			<option value="${rfc.province_Id }">${rfc.province_RFC }</option>
-	        		</c:forEach>
-	        	</select>
+	        	
 	        	<select class="sel_allClass pp_sel" onchange="queryProjectByCondition();">
-	           		<option disabled selected>选择类</option>
-	           		<c:forEach items="${subjects }" var="subject">
-	           			<option value="${subject.SBJ_Class }">${subject.SBJ_Class }</option>
+	           		<option value="0" selected>选择类</option>
+	           		<c:forEach items="${subClasses }" var="subClass">
+	           			<option value="${subClass }">${subClass }</option>
 	           		</c:forEach>
 	           	</select>
 	           	<select class="sel_allRegulation pp_sel" onchange="queryProjectByCondition();">
-	           		<option disabled selected>选择款</option>
+	           		<option value="0" selected>选择款</option>
 	           		<c:forEach items="${subjects }" var="subject">
 	           			<option value="${subject.SBJ_Regulation }">${subject.SBJ_Regulation }
 	           		</c:forEach>
 	           	</select>
 	           	<select class="sel_allItem pp_sel" onchange="queryProjectByCondition();">
-	           		<option disabled selected>选择项</option>
+	           		<option value="0" selected>选择项</option>
 	           		<c:forEach items="${subjects }" var="subject">
 	           			<option value="${subject.SBJ_Item }">${subject.SBJ_Item }</option>
 	           		</c:forEach>
 	           	</select>
+	           	<input type="text" class="cityRfc" placeholder="请输入文号"/>
+	        	<input type="text" class="cityName" placeholder="请输入项目名"/>
             </div>
             <table border="1" class="tab_cityProject">
                 <tr>

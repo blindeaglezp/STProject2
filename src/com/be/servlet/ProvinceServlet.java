@@ -54,7 +54,6 @@ public class ProvinceServlet extends HttpServlet {
 	private List<ProvinceProject> provinceProjects = null;
 	private ProvinceProject provinceProjectObj = null;
 	private CityProject cityProjectObj = null;
-	private ProvinceRfc provinceRfcObj = null;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -85,9 +84,6 @@ public class ProvinceServlet extends HttpServlet {
 		case "querySubjectByRegulation" : querySubjectByRegulation(request, response); break;
 		case "querySubjectByItem" : querySubjectByItem(request, response); break;
 		case "deleteSubject" : deleteSubject(request, response); break;
-		//case "queryProjectByCityName" : queryProjectByCityName(request, response); break;
-		//case "queryProjectByProvinceRFC" : queryProjectByProvinceRFC(request, response); break;
-		//case "queryProjectBySubClass" : queryProjectBySubClass(request, response); break;
 		case "addProvinceProject" : addProvinceProject(request, response); break;
 		case "queryRfcByRfc" : queryRfcByRfc(request, response); break;
 		case "queryProjectByCondition" : queryProjectByCondition(request, response); break;
@@ -114,6 +110,13 @@ public class ProvinceServlet extends HttpServlet {
 		}
 	}
 
+	/**
+	 * 根据条件查询项目信息
+	 * @author blindeagle
+	 * @param request 请求对象
+	 * @param response 响应对象
+	 * @return void
+	 */
 	private void queryProjectByCondition(HttpServletRequest request, HttpServletResponse response) {
 		String cityName = request.getParameter("cityName");
 		String countyName = request.getParameter("countyName");
@@ -143,47 +146,47 @@ public class ProvinceServlet extends HttpServlet {
 			subjects = SubjectOp.getSubjectByClass(subClass);
 			for (int i = 0; i < cityProjects.size(); i++) {
 				for (Subject subject : subjects) {
-					if (subject.getSBJ_Name().equals(cityProjects.get(i).getSubject_Name_CPFK())) {
+					if (!subject.getSBJ_Name().equals(cityProjects.get(i).getSubject_Name_CPFK())) {
 						cityProjects.remove(i);
+						i--;
 						break;
 					}
 				}
-				i--;
 			}
 		} else if (!"0".equals(subReg) && "0".equals(subItem)) {
 			subjects = SubjectOp.getSubjectByRegulation(subReg);
 			for (int i = 0; i < cityProjects.size(); i++) {
 				for (Subject subject : subjects) {
-					if (subject.getSBJ_Name().equals(cityProjects.get(i).getSubject_Name_CPFK())) {
+					if (!subject.getSBJ_Name().equals(cityProjects.get(i).getSubject_Name_CPFK())) {
 						cityProjects.remove(i);
+						i--;
 						break;
 					}
 				}
-				i--;
 			}
 		} else if (!"0".equals(subItem)) {
 			subjects = SubjectOp.getSubjectByRegulation(subItem);
 			for (int i = 0; i < cityProjects.size(); i++) {
 				for (Subject subject : subjects) {
-					if (subject.getSBJ_Name().equals(cityProjects.get(i).getSubject_Name_CPFK())) {
+					if (!subject.getSBJ_Name().equals(cityProjects.get(i).getSubject_Name_CPFK())) {
 						cityProjects.remove(i);
+						i--;
 						break;
 					}
 				}
-				i--;
 			}
 		}
-		if (!"0".equals(provinceRfc)) {
+		if (provinceRfc != null && !"".equals(provinceRfc)) {
 			for (int i = 0; i < cityProjects.size(); i++) {
-				if (provinceRfc.equals(cityProjects.get(i).getCity_RFC_CPFK())) {
+				if (!provinceRfc.equals(cityProjects.get(i).getCity_RFC_CPFK())) {
 					cityProjects.remove(i);
 					i--;
 				}
 			}
 		}
-		if (!"0".equals(projectName)) {
+		if (projectName != null && !"".equals(projectName)) {
 			for (int i = 0; i < cityProjects.size(); i++) {
-				if (projectName.equals(cityProjects.get(i).getProject_Name())) {
+				if (!projectName.equals(cityProjects.get(i).getProject_Name())) {
 					cityProjects.remove(i);
 					i--;
 				}
@@ -250,7 +253,6 @@ public class ProvinceServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-//		ProvinceProjectOp.get
 	}
 	
 	/**
@@ -666,91 +668,6 @@ public class ProvinceServlet extends HttpServlet {
 	}
 	
 	/**
-	 * 根据市名查询省级项目信息
-	 * @author blindeagle
-	 * @param request 请求对象
-	 * @param response 响应对象
-	 * @return void
-	 */
-	/*
-	private void queryProjectByCityName(HttpServletRequest request, HttpServletResponse response) {
-		String cityName = request.getParameter("cityName");
-		cityProjects = CityProjectOp.getProvinceProjectByCityNam(cityName);
-		subjects = new ArrayList<Subject>();
-		for (ProvinceProject project : projects) {
-			subjectObj = SubjectOp.getSubjectByName(project.getSubject_PPFK()).get(0);
-			subjects.add(subjectObj);
-		}
-		List<Object> result = new ArrayList<Object>();
-		result.add(projects);
-		result.add(subjects);
-		jsonArr = JSONArray.fromObject(result);
-		try {
-			response.getWriter().print(jsonArr);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	*/
-	
-	/**
-	 * 根据省级文号查询省级项目
-	 * @author blindeagle
-	 * @param request 请求对象
-	 * @param response 响应对象
-	 * @return void
-	 */
-	/*
-	private void queryProjectByProvinceRFC(HttpServletRequest request, HttpServletResponse response) {
-		String provinceRFC = request.getParameter("provinceRFC");
-		projects = ProvinceProjectOp.getProvinceProjectByRfc(provinceRFC);
-		subjects = new ArrayList<Subject>();
-		for (ProvinceProject project : projects) {
-			subjectObj = SubjectOp.getSubjectByName(project.getSubject_PPFK()).get(0);
-			subjects.add(subjectObj);
-		}
-		List<Object> result = new ArrayList<Object>();
-		result.add(projects);
-		result.add(subjects);
-		jsonArr = JSONArray.fromObject(result);
-		try {
-			response.getWriter().print(jsonArr);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	*/
-	
-	/**
-	 * 根据科目类查询省级项目
-	 * @author blindeagle
-	 * @param request 请求对象
-	 * @param response 响应对象
-	 * @return void
-	 */
-	/*
-	private void queryProjectBySubClass(HttpServletRequest request, HttpServletResponse response) {
-		String subClass = request.getParameter("subClass");
-		subjectObj = SubjectOp.getSubjectByClass(subClass).get(0);
-		projects = ProvinceProjectOp.getProvinceProjectBySubjectName(subjectObj.getSBJ_Name());
-		subjects = new ArrayList<Subject>();
-		for (ProvinceProject project : projects) {
-			subjectObj = SubjectOp.getSubjectByName(project.getSubject_PPFK()).get(0);
-			subjects.add(subjectObj);
-		}
-		List<Object> result = new ArrayList<Object>();
-		result.add(projects);
-		result.add(subjects);
-		jsonArr = JSONArray.fromObject(result);
-		try {
-			response.getWriter().print(jsonArr);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	*/
-	
-	/**
 	 * 添加科目
 	 * @author blindeagle
 	 * @param request 请求对象
@@ -787,7 +704,6 @@ public class ProvinceServlet extends HttpServlet {
 	 */
 	private void addProvinceProject(HttpServletRequest request, HttpServletResponse response) {
 		// 获取数据
-		
 		String provinceRfc = request.getParameter("cityRfc");
 		String subClass = request.getParameter("subClass");
 		String regulation = request.getParameter("regulation");
@@ -798,16 +714,12 @@ public class ProvinceServlet extends HttpServlet {
 		int centreBudget = Integer.parseInt(request.getParameter("centreBudget"));
 		int provinceBudget = Integer.parseInt(request.getParameter("provinceBudget"));
 		int cityLocalBudget = Integer.parseInt(request.getParameter("cityLocalBudget"));
-		int cityLocalCost = Integer.parseInt(request.getParameter("cityLocalCost"));
-		int cityLocalPercent = Integer.parseInt(request.getParameter("cityLocalPercent"));
-		
 		String cityAndCounty = request.getParameter("cityAndCounty");
 		
 		//　拆分字符串
 		String[] cityAndCountys = cityAndCounty.split(",");
 		for (String cc : cityAndCountys) {
 			String[] cs = cc.split(":");
-			
 			if ((cs[0] != null && !"".equals(cs[0])) && (cs[1] == null || "".equals(cs[1]))) {
 				// 添加省项目
 				provinceProjectObj = new ProvinceProject();
@@ -819,37 +731,16 @@ public class ProvinceServlet extends HttpServlet {
 				provinceProjectObj.setCentre_Budget(centreBudget);
 				provinceProjectObj.setProvince_Budget(provinceBudget);
 				provinceProjectObj.setCity_Local_Budget(cityLocalBudget);
-				provinceProjectObj.setCity_Local_Cost(cityLocalCost);
-				provinceProjectObj.setCity_Local_Percent(cityLocalPercent);
 				if (cs[2] != null && !"".equals(cs[2])) {
 					provinceProjectObj.setCounty_Budget(Integer.parseInt(cs[2]));
 				} else {
 					provinceProjectObj.setCounty_Budget(0);
 				}
-				if (cs[3] != null && !"".equals(cs[3])) {
-					provinceProjectObj.setCounty_Cost(Integer.parseInt(cs[3]));
-				} else {
-					provinceProjectObj.setCounty_Cost(0);
-				}
-				if (cs[4] != null && !"".equals(cs[4])) {
-					provinceProjectObj.setCounty_Percent(Integer.parseInt(cs[4]));
-				} else {
-					provinceProjectObj.setCounty_Percent(0);
-				}
 				ProvinceProjectOp.insertProvinceProject(provinceProjectObj);
-				// 添加省文号
-				provinceRfcObj = new ProvinceRfc();
-				provinceRfcObj.setCity_Name(cs[0]);
-				provinceRfcObj.setProvince_RFC(provinceRfc);
-				provinceRfcObj.setSBJ_ID_CITYFK(subjectObj.getSBJ_ID());
-				provinceRfcObj.setSBJ_Name_CITYFK(subjectObj.getSBJ_Name());
-				ProvinceRfcOp.insertProvinceRfc(provinceRfcObj);
 			}
-			
 			if ((cs[0] != null && !"".equals(cs[0])) && (cs[1] != null && !"".equals(cs[1]))) {
 				// 封装对象
 				cityProjectObj = new CityProject();
-//				cityProjectObj.setCity_RFC_CPFK(cityRfc);
 				cityProjectObj.setCity_RFC_CPFK(provinceRfc);
 				cityProjectObj.setSubject_Name_CPFK(subjectObj.getSBJ_Name());
 				cityProjectObj.setCounty_name_CPFK(cs[1]);
@@ -857,14 +748,9 @@ public class ProvinceServlet extends HttpServlet {
 				if (cs[2] != null && !"".equals(cs[2])) {
 					cityProjectObj.setCounty_Budget(Integer.parseInt(cs[2]));
 				}
-				if (cs[3] != null && !"".equals(cs[3])) {
-					cityProjectObj.setCounty_Cost(Integer.parseInt(cs[3]));
-				}
-				if (cs[4] != null && !"".equals(cs[4])) {
-					cityProjectObj.setCounty_Cost(Integer.parseInt(cs[4]));
-				}
 				CityProjectOp.insertCityProject(cityProjectObj);
 			}
+			
 			System.out.println("success");
 		}
 	}

@@ -24,62 +24,42 @@
 	<jsp:include page="/public/cityLeft.jsp"></jsp:include>
 	<div class="projectRight">
 		<div class="handle">
-			<select class="sel_allPPFK pp_sel"
-				onChange="queryProjectByProvinceRFC();">
-				<option disabled selected>选择文号</option>
-				<c:forEach items="${provinceRfcs }" var="rfc">
-					<option value="${rfc.province_RFC }">${rfc.province_RFC }</option>
-				</c:forEach>
-			</select> <select class="sel_allClass pp_sel"
-				onchange="queryProjectBySubClass();">
-				<option disabled selected>选择类</option>
+			<select class="sel_allClass pp_sel"
+				onchange="queryRegByClass();">
+				<option value="0" selected>选择类</option>
 				<c:forEach items="${subjects }" var="subject">
 					<option value="${subject.SBJ_Class }">${subject.SBJ_Class }</option>
 				</c:forEach>
-			</select> <select class="sel_allRegulation pp_sel"
-				onchange="selRegQuerySubAndItem();">
-				<option disabled selected>选择款</option>
-				<c:forEach items="${subjects }" var="subject">
-					<option value="${subject.SBJ_Regulation }">${subject.SBJ_Regulation }
-				</c:forEach>
-			</select> <select class="sel_allItem pp_sel" onchange="selItemQuerySubject();">
-				<option disabled selected>选择项</option>
-				<c:forEach items="${subjects }" var="subject">
-					<option value="${subject.SBJ_Item }">${subject.SBJ_Item }</option>
-				</c:forEach>
+			</select> 
+			<select class="sel_allRegulation pp_sel"
+				onchange="queryItemByReg();">
+				<option value="0" selected>选择款</option>
+			</select> 
+			<select class="sel_allItem pp_sel">
+				<option value="0" selected>选择项</option>
 			</select>
+			<input style="float:left;margin:10px 0 0 10px;" type="text" class="cityRfc" placeholder="请输入文号"/>
+			<input style="float:left;margin:10px 0 0 10px;" type="text" class="cityName" placeholder="请输入项目"/>
+			<button style="float:left;margin:10px 0 0 20px;" type="button" class="queryCityProByCondition">查询</button>
 			<button type="button" class="addCityProject">添加项目</button>
 		</div>
 		<table border="1" class="tab_cityProject">
 			<tr>
-				<th rowspan="3"></th>
-				<th rowspan="3">项目文号</th>
-				<th rowspan="2" colspan="3">科目</th>
-				<th rowspan="3">项目名</th>
-				<th rowspan="2" colspan="3">预算指标</th>
-				<th colspan="6">支付情况</th>
-				<th rowspan="3">支付进度</th>
-				<th rowspan="3">操作</th>
-			</tr>
-			<tr>
-				<th colspan="3">支付文号</th>
-				<th colspan="3">下发文号</th>
+				<th rowspan="2"></th>
+				<th rowspan="2">项目文号</th>
+				<th colspan="3">科目</th>
+				<th rowspan="2">项目名</th>
+				<th rowspan="2">预算指标</th>
+				<th rowspan="2">支付数</th>
+				<th rowspan="2">支付进度</th>
+				<th rowspan="2">操作</th>
 			</tr>
 			<tr>
 				<th>类</th>
 				<th>款</th>
 				<th>项</th>
-				<th>合计</th>
-				<th>中央</th>
-				<th>省级</th>
-				<th>预算指标</th>
-				<th>支付数</th>
-				<th>支付进度</th>
-				<th>预算指标</th>
-				<th>支付数</th>
-				<th>支付进度</th>
 			</tr>
-			<c:forEach items="${projects }" var="project" varStatus="s">
+			<c:forEach items="${provinceProjects }" var="project" varStatus="s">
 				<tr class="tab_content">
 					<td>${s.count }</td>
 					<td>${project.province_RFC_PPFK }</td>
@@ -87,16 +67,9 @@
 					<td>${subjects[s.count-1].SBJ_Regulation }</td>
 					<td>${subjects[s.count-1].SBJ_Item }</td>
 					<td>${project.project_Name }</td>
-					<td>${project.total_Budget }</td>
-					<td>${project.centre_Budget }</td>
-					<td>${project.province_Budget }</td>
 					<td>${project.city_Local_Budget }</td>
 					<td>${project.city_Local_Cost }</td>
 					<td>${project.city_Local_Percent }</td>
-					<td>${project.county_Budget }</td>
-					<td>${project.county_Cost }</td>
-					<td>${project.county_Percent }%</td>
-					<td></td>
 					<td>
 						<button type="button">删除</button> |
 						<button type="button">修改</button>
@@ -142,7 +115,7 @@
 				<td><div class="add_assign">+</div></td>
 			</tr>
 
-			<tr>
+			<tr class="item_assign">
 					<td id="text">县：</td>
 					<td><input type="text" class="county_assign"></td>
 					<td id="text">预算指标：</td>
