@@ -76,10 +76,11 @@ public class CountyServlet extends HttpServlet {
 	 * @return void
 	 */
 	private void updateCountyProject(HttpServletRequest request, HttpServletResponse response) {
+		userSession = (User) request.getSession().getAttribute("user");
 		String cityRfc = request.getParameter("cityRfc");
 		String projectName = request.getParameter("projectName");
 	
-		String countyName = request.getParameter("countyName");
+		String countyName = userSession.getUser_County_Name();
 		int cost = Integer.parseInt(request.getParameter("cost"));
 		cityProjects = CityProjectOp.getCityProjectByCityRfc(cityRfc);
 		for (CityProject cp : cityProjects) {
@@ -93,8 +94,7 @@ public class CountyServlet extends HttpServlet {
 				break;
 			}
 		}
-		userObj = (User) request.getSession().getAttribute("user");
-		cityProjects = CityProjectOp.getCityProjectByCountyName(userObj.getUser_County_Name());
+		cityProjects = CityProjectOp.getCityProjectByCountyName(userSession.getUser_County_Name());
 		subjects = new ArrayList<Subject>();
 		for (CityProject cp : cityProjects) {
 			subjects.add(SubjectOp.getSubjectByName(cp.getSubject_Name_CPFK()).get(0));
