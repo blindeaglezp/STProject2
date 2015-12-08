@@ -115,16 +115,14 @@
 			</div>
 			<table class="table_province">
 				<tr>
-					<td id="text">文号：</td>
+					<td id="text">省文号：</td>
 					<td><input type="text" class="cityRfc txt"></td>
-
 					<td id="text">类：</td>
 					<td><input type="text" class="class txt"></td>
 				</tr>
 				<tr>
 					<td id="text">款：</td>
 					<td><input type="text" class="regulation txt"></td>
-
 					<td id="text">项：</td>
 					<td><input type="text" class="item txt"></td>
 				</tr>
@@ -144,23 +142,18 @@
 					<td id="text">省级预算：</td>
 					<td><input type="text" class="cityLocalBudget txt"></td>
 				</tr>
-
-				<tr>
+			</table>
+			<table class="submit">
+				<tr background="#fff">
 					<td id="text" class="add_assign">分配+</td>
 				</tr>
-
-				<div class="item_assign">
 				<tr>
-					<td id="text">市：</td>
-					<td><input type="text" class="city_assign"></td>
-					<td id="text">县：</td>
-					<td><input type="text" class="county_assign"></td>
+					<td >
+					市：<input type="text" class="city_assign">
+					县：<input type="text" class="county_assign">
+					</td>
+					<td>预算指标：<input type="text" class="other_budget"></td>
 				</tr>
-				<tr>
-					<td>预算指标：</td>
-					<td><input type="text" class="other_budget"></td>
-				</tr>
-				</div>
 				<tr>
 					<td colspan=4 style="text-align: center;"><input type="button"
 						id="add_Project" class="btn_addProvinceProject btn_submit"

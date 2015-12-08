@@ -87,7 +87,7 @@
 		</div>
 		<table class="table" >
 			<tr>
-				<td id="text">文号：</td>
+				<td id="text">市文号：</td>
 				<td><input type="text" class="cityRfc txt"></td>
 
 				<td id="text">类：</td>
@@ -109,12 +109,13 @@
 			<tr>
 				<td id="text">市级预算：</td>
 				<td><input type="text" class="cityLocalBudget txt"></td>
+				<td id="text">省文号：</td>
+				<td><input type="text" class="cityLocalBudget txt"></td>
 			</tr>
 			<tr>
 				<td id="text">分配</td>
 				<td><div class="add_assign">+</div></td>
 			</tr>
-
 			<tr class="item_assign">
 					<td id="text">县：</td>
 					<td><input type="text" class="county_assign"></td>

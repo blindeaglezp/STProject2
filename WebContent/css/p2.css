@@ -39,12 +39,12 @@
 
 /* start addCityProject */
 .pop2 .content .div_assign{margin:300px 20px 10px;width:450px;}
-#addCityProject .table tr #text{text-align:right;margin:20px;}
+#addCityProject .table tr #text{text-align:right;margin:10px;}
 #addCityProject .table tr #add_CityProject{background:#438eb9;width:30%;height:30px;border-radius:3px;text-color:#ffffff;border:none;}
 /* addCityProject end */
 #addProvinceProject  .table_province tr {background:#fff;}
-#addProvinceProject  .table_province tr #add_Project{background:#438eb9;width:30%;height:30px;border-radius:3px;text-color:#ffffff;border:none;}
-
+#addProvinceProject .submit tr {background:#fff;}
+#addProvinceProject .submit tr #add_Project{background:#438eb9;width:30%;height:30px;border-radius:3px;text-color:#ffffff;border:none;}
 
 
  
