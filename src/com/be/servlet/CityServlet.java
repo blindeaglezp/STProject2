@@ -75,8 +75,6 @@ public class CityServlet extends HttpServlet {
 
 	}
 
-	
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
@@ -101,8 +99,9 @@ public class CityServlet extends HttpServlet {
 		if (!"0".equals(subClass) && "0".equals(subReg)) {
 			subjects = SubjectOp.getSubjectByClass(subClass);
 			for (int i = 0; i < provinceProjects.size(); i++) {
-				for (Subject subject : subjects) {
-					if (!subject.getSBJ_Name().equals(provinceProjects.get(i).getSubject_PPFK())) {
+				List<Subject> subs = SubjectOp.getSubjectByName(provinceProjects.get(i).getSubject_PPFK());
+				for (int j = 0; j < subs.size(); j++) {
+					if (!subClass.equals(subs.get(j).getSBJ_Class())) {
 						provinceProjects.remove(i);
 						i--;
 						break;
@@ -112,8 +111,9 @@ public class CityServlet extends HttpServlet {
 		} else if (!"0".equals(subReg) && "0".equals(subItem)) {
 			subjects = SubjectOp.getSubjectByRegulation(subReg);
 			for (int i = 0; i < provinceProjects.size(); i++) {
-				for (Subject subject : subjects) {
-					if (!subject.getSBJ_Name().equals(provinceProjects.get(i).getSubject_PPFK())) {
+				List<Subject> subs = SubjectOp.getSubjectByName(provinceProjects.get(i).getSubject_PPFK());
+				for (int j = 0; j < subs.size(); j++) {
+					if (!subReg.equals(subs.get(j).getSBJ_Regulation())) {
 						provinceProjects.remove(i);
 						i--;
 						break;
@@ -121,10 +121,11 @@ public class CityServlet extends HttpServlet {
 				}
 			}
 		} else if (!"0".equals(subItem)) {
-			subjects = SubjectOp.getSubjectByItem(subItem);
+			subjects = SubjectOp.getSubjectByRegulation(subItem);
 			for (int i = 0; i < provinceProjects.size(); i++) {
-				for (Subject subject : subjects) {
-					if (!subject.getSBJ_Name().equals(provinceProjects.get(i).getSubject_PPFK())) {
+				List<Subject> subs = SubjectOp.getSubjectByName(provinceProjects.get(i).getSubject_PPFK());
+				for (int j = 0; j < subs.size(); j++) {
+					if (!subItem.equals(subs.get(j).getSBJ_Item())) {
 						provinceProjects.remove(i);
 						i--;
 						break;
@@ -195,6 +196,11 @@ public class CityServlet extends HttpServlet {
 			return;
 		}
 		users = UserOp.getUserByCityName(userSession.getUser_City_Name());
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i).getUser_County_Name() == null || "".equals(users.get(i).getUser_County_Name())) {
+				users.remove(i);
+			}
+		}
 		cityObj = CityOp.getCityByName(userSession.getUser_City_Name());
 		countys = CountyOp.getCountyByCityID(cityObj.getCityID());
 		request.setAttribute("users", users);
@@ -240,11 +246,17 @@ public class CityServlet extends HttpServlet {
 		}
 		provinceProjects = ProvinceProjectOp.getProvinceProjectByCityName(userSession.getUser_City_Name());
 		subjects = new ArrayList<Subject>();
+		List<String> subs = new ArrayList<String>();
 		for (ProvinceProject pp : provinceProjects) {
 			subjects.add(SubjectOp.getSubjectByName(pp.getSubject_PPFK()).get(0));
+			subjectObj = SubjectOp.getSubjectByName(pp.getSubject_PPFK()).get(0);
+			if (!subs.contains(subjectObj.getSBJ_Class())) {
+				subs.add(subjectObj.getSBJ_Class());
+			}
 		}
 		request.setAttribute("provinceProjects", provinceProjects);
 		request.setAttribute("subjects", subjects);
+		request.setAttribute("subs", subs);
 		try {
 			request.getRequestDispatcher("/WEB-INF/jsp/city/cityProjectManage.jsp").forward(request, response);
 		} catch (ServletException | IOException e) {
@@ -408,8 +420,18 @@ public class CityServlet extends HttpServlet {
 	 * @return void
 	 */
 	private void queryUserByCountyName(HttpServletRequest request, HttpServletResponse response) {
+		userSession = (User) request.getSession().getAttribute("user");
 		String countyName = request.getParameter("countyName");
-		users = UserOp.getUserByCountyName(countyName);
+		if ("0".equals(countyName)) {
+			users = UserOp.getUserByCityName(userSession.getUser_City_Name());
+			for (int i = 0; i < users.size(); i++) {
+				if (users.get(i).getUser_County_Name() == null || "".equals(users.get(i).getUser_County_Name())) {
+					users.remove(i);
+				}
+			}
+		} else {
+			users = UserOp.getUserByCountyName(countyName);
+		}
 		jsonArr = JSONArray.fromObject(users);
 		try {
 			response.getWriter().print(jsonArr);
@@ -488,6 +510,7 @@ public class CityServlet extends HttpServlet {
 		int cityLocalBudget = Integer.parseInt(request.getParameter("cityLocalBudget"));
 		String provinceRfc = request.getParameter("provinceRfc");
 		
+		
 		String cityAndCounty = request.getParameter("cityAndCounty");
 		
 		cityProjectObj = new CityProject();
@@ -497,7 +520,7 @@ public class CityServlet extends HttpServlet {
 		cityProjectObj.setTotal_Budget(totalBudget);
 		cityProjectObj.setCounty_Budget(cityLocalBudget);
 		cityProjectObj.setProjec_Name(projectName);
-		cityProjectObj.setCounty_name_CPFK("市本级");
+		cityProjectObj.setCounty_name_CPFK(userSession.getUser_City_Name() + "本级");
 		CityProjectOp.insertCityProject(cityProjectObj);
 		
 		//　拆分字符串

@@ -63,9 +63,9 @@
 					<div class="navbar-header pull-right" role="navigation">
 						<ul class="nav ace-nav">
 							<li class="light-blue">
-								<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+								<a data-toggle="dropdown" href="<%=request.getContextPath() %>/servlet/LoginServlet?type=quit" class="dropdown-toggle">
 									<img class="nav-user-photo" src="<%=request.getContextPath() %>/assets/avatars/user.jpg" alt="Jason's Photo" />
-									<small>退出</small>
+									<small >退出</small>
 								</a>
 							</li>
 						</ul><!-- /.ace-nav -->
@@ -86,6 +86,7 @@
  window.jQuery || document.write("<script src='<%=request.getContextPath() %>/assets/js/jquery-1.10.2.min.js'>"+"<"+"script>");
 </script>
 <![endif]-->
+		<script src="<%=request.getContextPath()%>/js/jquery-2.1.4.min.js" type="text/javascript"></script>
 		<script src="<%=request.getContextPath() %>/assets/js/bootstrap.min.js"></script>
 		<script src="<%=request.getContextPath() %>/assets/js/typeahead-bs2.min.js"></script>
 		<script src="<%=request.getContextPath() %>/assets/js/jquery-ui-1.10.3.custom.min.js"></script>

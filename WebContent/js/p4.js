@@ -13,6 +13,7 @@ function projectTotal() {
 	$(".tab_provinceProject .tab_content .countyCost").each(function() {
 		costTotal += parseInt($(this).html());
 	});
+	$(".tab_provinceProject").find("tr.tab_count").remove();
 	$(".tab_provinceProject").append("<tr class='tab_count'><td>合计</td><td></td><td></td>" +
 		"<td></td><td></td><td></td><td></td><td></td><td class='budgetTotal'>"+budgetTotal+"</td>" +
 		"<td class='costTotal'>"+costTotal+"</td><td class='percentTotal'>"+(costTotal/budgetTotal*100).toFixed(2) +"%</td></tr>");
@@ -80,7 +81,7 @@ $(".queryProjectByCondition").click(function queryProjectByCondition() {
 					"<td>"+this.city_RFC_CPFK+"</td><td>"+data[2][i-1].SBJ_Class+"</td>" +
 					"<td>"+data[2][i-1].SBJ_Regulation+"</td><td>"+data[2][i-1].SBJ_Item+"</td>" +
 					"<td>"+this.project_Name+"</td><td class='countyBudget'>"+this.county_Budget+"</td>" +
-					"<td class='countyCost'>"+this.county_Cost+"</td><td>"+this.county_Percent+"</td>" +
+					"<td class='countyCost'>"+this.county_Cost+"</td><td>"+this.county_Percent+"%</td>" +
 					"<td><button type='button'>删除</button> | <button type='button'>修改</button></td></tr>");
 				i++;
 			});
@@ -193,9 +194,11 @@ $(document).ready(function() {
 });
 
 //点击添加分配条目按钮，添加分配条目
-$("#addCityProject").find(".add_assign").click(function() {
-	$(".btn_addCityProject").parents("tr").before("<tr class='item_assign'><td id='text'>县：</td><td><input type='text' class='county_assign'>" +
-		"</td><td id='text'>预算指标：</td><td><input type='text' class='other_budget'></td></tr>");
+$("#addProvinceProject").find(".add_assign").click(function() {
+	$(".btn_addProvinceProject").parents("tr").before("<tr class='sub_content'><td>" +
+		"市：<input type='text' class='city_assign'></td><td>" +
+		"县：<input type='text' class='county_assign'></td>" +
+		"<td>预算指标：<input type='text' class='other_budget'></td></tr>");
 });
 
 // 点击添加按钮，弹出添加省级项目的窗体
@@ -218,11 +221,12 @@ $(".btn_addProvinceProject").click(function() {
 	var provinceBudget = $content.find(".provinceBudget").val();
 	var cityLocalBudget = $content.find(".cityLocalBudget").val();
 	var $item_assign = $(".sub_content");
-	var cityAndCounty;
+	var cityAndCounty = "";
 	$item_assign.each(function() {
-		cityAndCounty += this.find(".city_assign").val() + ":" + this.find(".county_assign").val() +
-		":" + this.find(".other_budget").val() + ",";
+		cityAndCounty += $(this).find(".city_assign").val() + ":" + $(this).find(".county_assign").val() +
+		":" + $(this).find(".other_budget").val() + ",";
 	});
+	alert(cityAndCounty);
 	var data = {"provinceRfc":provinceRfc,"subClass":subClass,"regulation":regulation,"item":item,
 			"projectName":projectName,"totalBudget":totalBudget,"centreBudget":centreBudget,"provinceBudget":provinceBudget,
 			"cityLocalBudget":cityLocalBudget,"cityAndCounty":cityAndCounty};
@@ -233,23 +237,21 @@ $(".btn_addProvinceProject").click(function() {
 		data:data,
 		success:function(data){
 			$("#gray").hide();
-		    $("#addCityProject").hide();
-		    var $tab_cityProject = $(".projectRight .tab_cityProject");
+		    $("#addProvinceProject").hide();
+		    var $tab_cityProject = $(".projectRight .tab_provinceProject");
 		    $tab_cityProject.find("tr.tab_content").remove();
 		    var i = 1;
 		    $(data[0]).each(function() {
 		    	$tab_cityProject.append("<tr class='tab_content'><td>"+i+"</td>" +
-		    			"<td>"+this.province_RFC_PPFK+"</td><td>"+data[1][i-1].SBJ_Class+"</td>" +
-	                    "<td>"+data[1][i-1].SBJ_Regulation+"</td><td>"+data[1][i-1].SBJ_Item+"</td>" +
-	                    "<td>"+this.project_Name+"</td><td>"+this.total_Budget+"</td>" +
-	                    "<td>"+this.centre_Budget+"</td><td>"+this.province_Budget+"</td>" +
-	                    "<td>"+this.city_Local_Budget+"</td><td>"+this.city_Local_Cost+"</td>" +
-	                    "<td>"+this.city_Local_Percent+"</td><td>"+this.county_Budget+"</td>" +
-	                    "<td>"+this.county_Cost+"</td><td>"+this.county_Percent+"%</td>" +
-	                    "<td></td><td><button type='button'>删除</button> |" +
-	                    "<button type='button'>修改</button></td></tr>");
+					"<td>"+data[1][i-1]+"</td><td>"+this.county_name_CPFK+"</td>" +
+					"<td>"+this.city_RFC_CPFK+"</td><td>"+data[2][i-1].SBJ_Class+"</td>" +
+					"<td>"+data[2][i-1].SBJ_Regulation+"</td><td>"+data[2][i-1].SBJ_Item+"</td>" +
+					"<td>"+this.project_Name+"</td><td class=countyBudget'>"+this.county_Budget+"</td>" +
+					"<td class='countyCost'>"+this.county_Cost+"</td><td>"+this.county_Percent+"</td>" +
+					"<td><button type='button'>删除</button> |<button type='button'>修改</button></td></tr>");
 		    	i++;
 		    });
+		    projectTotal();
 		}
 	});
 });
@@ -259,6 +261,13 @@ $(".projectRight .handle .addCityProject").click(function() {
 	$("#gray").show();
     $("#addCityProject").show();
     setCenter();
+});
+
+// 添加县项信息
+$("#addCityProject").find(".add_assign").click(function() {
+	$("#addCityProject").find(".item_assign").last().after("<tr class='item_assign'>" +
+		"<td id='text'>县：</td><td><input type='text' class='county_assign'></td>" +
+		"<td id='text'>预算指标：</td><td><input type='text' class='other_budget'></td></tr>");
 });
 
 // 添加市项目
@@ -273,15 +282,14 @@ $("#addCityProject").find(".btn_addCityProject").click(function() {
 	var cityLocalBudget = $content.find(".cityLocalBudget").val();
 	var provinceRfc = $content.find(".provinceRfc").val();
 	var $item_assign = $("#addCityProject").find(".item_assign");
-	var cityAndCounty = new Array();
+	var cityAndCounty = "";
 	for (var i = 0; i < $item_assign.size(); i++) {
-		cityAndCounty[i] = $item_assign.eq(i).find(".county_assign").val() +
-			":" + $item_assign.eq(i).find(".other_budget").val();
+		cityAndCounty += $item_assign.eq(i).find(".county_assign").val() +
+			":" + $item_assign.eq(i).find(".other_budget").val() + ",";
 	}
-	alert(cityAndCounty);
 	var data = {"cityRfc":cityRfc,"subClass":subClass,"regulation":regulation,"item":item,
 			"projectName":projectName,"totalBudget":totalBudget,"provinceRfc":provinceRfc,
-			"cityLocalBudget":cityLocalBudget,"cityAndCounty":cityAndCounty.toString()};
+			"cityLocalBudget":cityLocalBudget,"cityAndCounty":cityAndCounty};
 	$.ajax({
 		type:"post",
 		url:"/STProject2/servlet/CityServlet?type=addCityProject",
@@ -390,7 +398,7 @@ $(".queryCityProByCondition").click(function() {
 					"<td>"+this.province_RFC_PPFK+"</td><td>"+data[1][i-1].SBJ_Class+"</td>" +
 					"<td>"+data[1][i-1].SBJ_Regulation+"</td><td>"+data[1][i-1].SBJ_Item+"</td>" +
 					"<td>"+this.project_Name+"</td><td>"+this.city_Local_Budget+"</td>" +
-					"<td>"+this.city_Local_Cost+"</td><td>"+this.city_Local_Percent+"</td>" +
+					"<td>"+this.city_Local_Cost+"</td><td>"+this.city_Local_Percent+"%</td>" +
 					"<td><button type='button'>删除</button> |<button type='button'>修改</button></td></tr>");
 				i++;
 			});

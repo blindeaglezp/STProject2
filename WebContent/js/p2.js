@@ -388,7 +388,7 @@ function city_selCountyQueryUser() {
 					$tab_user.find(".tab_content").remove();
 					var i = 1;
 					$(data).each(function() {
-						$tab_user.append("<tr class='tab_content'><td>"+i+"</td><th>"+this.user_City_Name+"</th>" + 
+						$tab_user.append("<tr class='tab_content'><td>"+i+"</td>" + 
 						"<th>"+this.user_County_Name+"</th><td>"+this.user_Name+"</td><td>"+this.user_Level+"</td><td>" + 
 						"<button type='button' class='btn_deleteUser' value='"+ this.user_Name +"'>删除</button> |" +
 						"<button type='button' class='btn_updateUser' value='"+ this.user_Name +"'>修改</button></td></tr>");

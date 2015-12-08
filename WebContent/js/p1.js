@@ -164,10 +164,16 @@ function selCityQueryUserAndCounty() {
 
 // 修改县，查询用户信息
 function selCountyQueryUser() {
+	var cityName;
+	$(".right .handle .sel_city option").each(function() {
+		if (this.selected) {
+			cityName = $(this).val();
+		}
+	});
 	$(".right .handle .sel_county option").each(function() {
 		if (this.selected) {
 			var countyName = $(this).val();
-			var data = {"countyName":countyName};
+			var data = {"cityName":cityName,"countyName":countyName};
 			$.ajax({
 				type : "POST",
 				dataType : "json",

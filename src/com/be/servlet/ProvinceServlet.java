@@ -308,7 +308,7 @@ public class ProvinceServlet extends HttpServlet {
 			}
 		}
 		request.setAttribute("citys", citys);
-		request.setAttribute("provinceProjects", provinceProjects);
+//		request.setAttribute("provinceProjects", provinceProjects);
 		request.setAttribute("provinceRfcs", provinceRfcs);
 		request.setAttribute("subjects", subjects);
 		request.setAttribute("subClasses", subClasses);
@@ -454,7 +454,11 @@ public class ProvinceServlet extends HttpServlet {
 	 */
 	private void queryUserByCityName(HttpServletRequest request, HttpServletResponse response) {
 		String cityName = request.getParameter("cityName");
-		users = UserOp.getUserByCityName(cityName);
+		if ("0".equals(cityName)) {
+			users = UserOp.getAllUser();
+		} else {
+			users = UserOp.getUserByCityName(cityName);
+		}
 		jsonArr = JSONArray.fromObject(users);
 		try {
 			response.getWriter().print(jsonArr);
@@ -491,7 +495,12 @@ public class ProvinceServlet extends HttpServlet {
 	 */
 	private void queryUserByCountyName(HttpServletRequest request, HttpServletResponse response) {
 		String countyName = request.getParameter("countyName");
-		users = UserOp.getUserByCountyName(countyName);
+		String cityName = request.getParameter("cityName");
+		if ("0".equals(countyName)) {
+			users = UserOp.getUserByCityName(cityName);
+		} else {
+			users = UserOp.getUserByCountyName(countyName);
+		}
 		jsonArr = JSONArray.fromObject(users);
 		try {
 			response.getWriter().print(jsonArr);
@@ -727,6 +736,7 @@ public class ProvinceServlet extends HttpServlet {
 				// 添加省项目
 				provinceProjectObj = new ProvinceProject();
 				provinceProjectObj.setProvince_RFC_PPFK(provinceRfc);
+				System.out.println(cs[0]);
 				provinceProjectObj.setCity_Name_PPFK(cs[0]);
 				provinceProjectObj.setSubject_PPFK(subjectObj.getSBJ_Name());
 				provinceProjectObj.setProject_Name(projectName);
@@ -742,14 +752,32 @@ public class ProvinceServlet extends HttpServlet {
 				cityProjectObj = new CityProject();
 				cityProjectObj.setCity_RFC_CPFK(provinceRfc);
 				cityProjectObj.setSubject_Name_CPFK(subjectObj.getSBJ_Name());
+				System.out.println(cs[1]);
 				cityProjectObj.setCounty_name_CPFK(cs[1]);
 				cityProjectObj.setTotal_Budget(totalBudget);
 				cityProjectObj.setProjec_Name(projectName);
 				cityProjectObj.setCounty_Budget(Integer.parseInt(cs[2]));
 				CityProjectOp.insertCityProject(cityProjectObj);
 			}
-			
-			System.out.println("success");
+		}
+		cityProjects = CityProjectOp.getAllCityProject();
+		subjects = new ArrayList<Subject>();
+		List<String> cityNames = new ArrayList<String>();
+		for (CityProject project : cityProjects) {
+			countyObj = CountyOp.getAllCountyByCountyName(project.getCounty_name_CPFK()).get(0);
+			String cityName = CityOp.getCityByID(countyObj.getCity_FK()).getCityName();
+			cityNames.add(cityName);
+			subjects.add(SubjectOp.getSubjectByName(project.getSubject_Name_CPFK()).get(0));
+		}
+		List<Object> result = new ArrayList<Object>();
+		result.add(cityProjects);
+		result.add(cityNames);
+		result.add(subjects);
+		jsonArr = JSONArray.fromObject(result);
+		try {
+			response.getWriter().print(jsonArr);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 	

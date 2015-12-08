@@ -78,14 +78,14 @@
 						<td>${project.project_Name }</td>
 						<td class="countyBudget">${project.county_Budget }</td>
 						<td class="countyCost">${project.county_Cost }</td>
-						<td>${project.county_Percent }</td>
+						<td>${project.county_Percent }%</td>
 						<td>
 							<button type="button">删除</button> |
 							<button type="button">修改</button>
 						</td>
 					</tr>
 				</c:forEach>
-				<c:forEach items="${provinceProjects }" var="project" varStatus="s">
+				<%-- <c:forEach items="${provinceProjects }" var="project" varStatus="s">
 					<tr class="tab_content">
 						<td>${s.count }</td>
 						<td>${proCitys[s.count-1] }</td>
@@ -103,7 +103,7 @@
 							<button type="button">修改</button>
 						</td>
 					</tr>
-				</c:forEach>
+				</c:forEach> --%>
 			</table>
 		</div>
 

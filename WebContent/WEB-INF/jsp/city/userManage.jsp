@@ -22,7 +22,7 @@
         <div class="right">
             <div class="handle">
             	<select class="sel_county" onchange="city_selCountyQueryUser();">
-            		<option disabled selected>选择县</option>
+            		<option value="0" selected>选择县</option>
             		<c:forEach items="${countys }" var="county">
             			<option value="${county.county_Name }">${county.county_Name }</option>
             		</c:forEach>

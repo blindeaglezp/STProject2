@@ -27,8 +27,8 @@
 			<select class="sel_allClass pp_sel"
 				onchange="queryRegByClass();">
 				<option value="0" selected>选择类</option>
-				<c:forEach items="${subjects }" var="subject">
-					<option value="${subject.SBJ_Class }">${subject.SBJ_Class }</option>
+				<c:forEach items="${subs }" var="subject">
+					<option value="${subject }">${subject }</option>
 				</c:forEach>
 			</select> 
 			<select class="sel_allRegulation pp_sel"
@@ -46,7 +46,7 @@
 		<table border="1" class="tab_cityProject">
 			<tr>
 				<th rowspan="2"></th>
-				<th rowspan="2">项目文号</th>
+				<th rowspan="2">省文号</th>
 				<th colspan="3">科目</th>
 				<th rowspan="2">项目名</th>
 				<th rowspan="2">预算指标</th>
@@ -69,7 +69,7 @@
 					<td>${project.project_Name }</td>
 					<td>${project.city_Local_Budget }</td>
 					<td>${project.city_Local_Cost }</td>
-					<td>${project.city_Local_Percent }</td>
+					<td>${project.city_Local_Percent }%</td>
 					<td>
 						<button type="button">删除</button> |
 						<button type="button">修改</button>
@@ -110,7 +110,7 @@
 				<td id="text">市级预算：</td>
 				<td><input type="text" class="cityLocalBudget txt"></td>
 				<td id="text">省文号：</td>
-				<td><input type="text" class="cityLocalBudget txt"></td>
+				<td><input type="text" class="provinceRfc txt"></td>
 			</tr>
 			<tr>
 				<td id="text_d" class="add_assign">分配+</td>

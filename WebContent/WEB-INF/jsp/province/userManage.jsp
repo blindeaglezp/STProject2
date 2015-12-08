@@ -51,12 +51,12 @@
 	<div class="right">
 		<div class="handle">
 			<select class="sel_city" onchange="selCityQueryUserAndCounty();">
-				<option disabled selected>选择市</option>
+				<option value="0" selected>选择市</option>
 				<c:forEach items="${citys }" var="city">
 					<option value="${city.cityName }">${city.cityName }</option>
 				</c:forEach>
 			</select> <select class="sel_county" onchange="selCountyQueryUser();">
-				<option disabled selected>选择县</option>
+				<option value="0" selected>选择县</option>
 			</select>
 			<button type="button" class="addUser">添加用户</button>
 		</div>

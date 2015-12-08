@@ -35,6 +35,7 @@ public class LoginServlet extends HttpServlet {
 		
 		switch (type) {
 		case "checkUser" : checkUser(request, response); break;
+		case "quit" : quit(request, response); break;
 		}
 		
 	}
@@ -42,6 +43,15 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
+	}
+	
+	private void quit(HttpServletRequest request, HttpServletResponse response) {
+		request.getSession().invalidate();
+		try {
+			response.sendRedirect("/STProject2/login.jsp");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
