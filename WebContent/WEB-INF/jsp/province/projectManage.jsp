@@ -150,7 +150,9 @@
 				<tr>
 					<td >
 					市：<input type="text" class="city_assign">
-					县：<input type="text" class="county_assign">
+					</td>
+					<td>
+						县：<input type="text" class="county_assign">
 					</td>
 					<td>预算指标：<input type="text" class="other_budget"></td>
 				</tr>
