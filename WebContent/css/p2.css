@@ -21,7 +21,7 @@
 .pop2{width:800px;height:700px;display:none;background:#FFF;position:absolute;overflow:scroll;}
 .pop2 .title{width:800px;height:45px;background:#4e72b8;color:#FFF;font-size:18px;font-family:"微软雅黑";line-height:45px;
     text-indent:35px;cursor:pointer;}
-.pop2 .title a{color:#DDD;font-size:24px;text-decoration:none;float:right;margin-right:10px;}
+.pop2 .title a{color:#DDD;font-size:24px;text-decoration:none;float:right;margin-right:25px;}
 .pop2 .title a:hover{color:#FFF;}
 .pop2 .content{width:800px;float:left;}
 .pop2 .content p{font-size:16px;font-family:"微软雅黑";margin:10px;float:left;}

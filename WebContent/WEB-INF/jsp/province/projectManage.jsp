@@ -145,11 +145,7 @@
 			</table>
 			<table class="submit">
 				<tr background="#fff">
-<<<<<<< HEAD
-					<td id="text" class="add_assign">分配+</td> 
-=======
 					<td id="text_s" class="add_assign">分配+</td>
->>>>>>> 52a4e923dc9128f775c70de26a1493909000d4c8
 				</tr>
 				<tr class="sub_content">
 					<td >
