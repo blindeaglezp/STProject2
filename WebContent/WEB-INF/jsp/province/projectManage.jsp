@@ -145,9 +145,9 @@
 			</table>
 			<table class="submit">
 				<tr background="#fff">
-					<td id="text" class="add_assign">分配+</td>
+					<td id="text" class="add_assign">分配+</td> 
 				</tr>
-				<tr>
+				<tr class="sub_content">
 					<td >
 					市：<input type="text" class="city_assign">
 					县：<input type="text" class="county_assign">

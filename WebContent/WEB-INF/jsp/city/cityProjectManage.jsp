@@ -110,7 +110,7 @@
 				<td id="text">市级预算：</td>
 				<td><input type="text" class="cityLocalBudget txt"></td>
 				<td id="text">省文号：</td>
-				<td><input type="text" class="cityLocalBudget txt"></td>
+				<td><input type="text" class="provinceRfc txt"></td>
 			</tr>
 			<tr>
 				<td id="text">分配</td>

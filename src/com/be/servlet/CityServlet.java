@@ -478,7 +478,7 @@ public class CityServlet extends HttpServlet {
 		userSession = (User) request.getSession().getAttribute("user");
 		// 获取数据
 		
-		String provinceRfc = request.getParameter("cityRfc");
+		String cityRfc = request.getParameter("cityRfc");
 		String subClass = request.getParameter("subClass");
 		String regulation = request.getParameter("regulation");
 		String item = request.getParameter("item");
@@ -486,18 +486,30 @@ public class CityServlet extends HttpServlet {
 		String projectName = request.getParameter("projectName");
 		int totalBudget = Integer.parseInt(request.getParameter("totalBudget"));
 		int cityLocalBudget = Integer.parseInt(request.getParameter("cityLocalBudget"));
+		String provinceRfc = request.getParameter("provinceRfc");
 		
 		String cityAndCounty = request.getParameter("cityAndCounty");
 		
+		cityProjectObj = new CityProject();
+		cityProjectObj.setCity_RFC_CPFK(provinceRfc);
+		cityProjectObj.setTown_RFC_CPFK(cityRfc);
+		cityProjectObj.setSubject_Name_CPFK(subjectObj.getSBJ_Name());
+		cityProjectObj.setTotal_Budget(totalBudget);
+		cityProjectObj.setCounty_Budget(cityLocalBudget);
+		cityProjectObj.setProjec_Name(projectName);
+		cityProjectObj.setCounty_name_CPFK("市本级");
+		CityProjectOp.insertCityProject(cityProjectObj);
+		
 		//　拆分字符串
 		String[] cityAndCountys = cityAndCounty.split(",");
+		System.out.println(cityAndCounty.length());
 		for (String cc : cityAndCountys) {
 			String[] cs = cc.split(":");
-			System.out.println(cs[0]);
 			if ((cs[0] != null && !"".equals(cs[0]))) {
 				// 封装对象
 				cityProjectObj = new CityProject();
 				cityProjectObj.setCity_RFC_CPFK(provinceRfc);
+				cityProjectObj.setTown_RFC_CPFK(cityRfc);
 				cityProjectObj.setSubject_Name_CPFK(subjectObj.getSBJ_Name());
 				cityProjectObj.setCounty_name_CPFK(cs[0]);
 				cityProjectObj.setTotal_Budget(totalBudget);
