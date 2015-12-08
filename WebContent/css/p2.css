@@ -18,12 +18,12 @@
 /* projectRight end */   
 
 /* start pop2 */
-.pop2{width:650px;height:1200px;display:none;background:#FFF;position:absolute;}
-.pop2 .title{width:650px;height:45px;background:#4e72b8;color:#FFF;font-size:18px;font-family:"微软雅黑";line-height:45px;
+.pop2{width:800px;height:1200px;display:none;background:#FFF;position:absolute;}
+.pop2 .title{width:800px;height:45px;background:#4e72b8;color:#FFF;font-size:18px;font-family:"微软雅黑";line-height:45px;
     text-indent:35px;cursor:pointer;}
 .pop2 .title a{color:#DDD;font-size:24px;text-decoration:none;float:right;margin-right:10px;}
 .pop2 .title a:hover{color:#FFF;}
-.pop2 .content{width:650px;float:left;}
+.pop2 .content{width:800px;float:left;}
 .pop2 .content p{font-size:16px;font-family:"微软雅黑";margin:10px;float:left;}
 .pop2 .content .div_assign{margin:400px 20px 10px;width:450px;}
 .pop2 .content .div_assign span.title_assign{font-size:16px;float:left;width:44px;height:30px;display:block;line-height:30px;}
