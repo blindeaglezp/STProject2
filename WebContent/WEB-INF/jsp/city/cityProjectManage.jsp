@@ -38,8 +38,8 @@
 			<select class="sel_allItem pp_sel">
 				<option value="0" selected>选择项</option>
 			</select>
-			<input style="float:left;margin:10px 0 0 10px;" type="text" class="cityRfc" placeholder="请输入文号"/>
-			<input style="float:left;margin:10px 0 0 10px;" type="text" class="cityName" placeholder="请输入项目"/>
+			<input style="float:left;margin:10px 0 0 10px;" type="text" class="cityRfc" placeholder="请输入省文号"/>
+			<input style="float:left;margin:10px 0 0 10px;" type="text" class="cityName" placeholder="请输入项目名"/>
 			<button style="float:left;margin:10px 0 0 20px;" type="button" class="queryCityProByCondition">查询</button>
 			<button type="button" class="addCityProject">添加项目</button>
 		</div>
@@ -110,7 +110,7 @@
 				<td id="text">市级预算：</td>
 				<td><input type="text" class="cityLocalBudget txt"></td>
 				<td id="text">省文号：</td>
-				<td><input type="text" class="provinceRfc txt"></td>
+				<td><input type="text" class="cityLocalBudget txt"></td>
 			</tr>
 			<tr>
 				<td id="text_d" class="add_assign">分配+</td>
