@@ -39,12 +39,6 @@
 	                </tr>
                 </c:forEach>
             </table>
-        	<div class="pageNum" align="center">
-        		<button type="button" class="pageBtn" id="btn_select">第一页</button>
-        		<button type="button" class="pageBtn" id="btn_select">最后一页</button>
-        		<button type="button" class="pageBtn" id="btn_select">上一页</button>
-        		<button type="button" class="pageBtn" id="btn_select">下一页</button>
-        	</div>
         </div>
 
     <div id="gray"></div>

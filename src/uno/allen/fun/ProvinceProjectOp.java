@@ -5,14 +5,14 @@ import uno.allen.db.ProvinceProjectDb;
 import uno.allen.entity.ProvinceProject;
 
 public class ProvinceProjectOp {
-//	²åÈëÉ¾³ýÊý¾Ý
+//	ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public static void insertProvinceProject(ProvinceProject provinceProject){
 		ProvinceProjectDb.insertProvinceProject(provinceProject);
 	}
-	public static void deleteProvinceProject(String projectName){
-		ProvinceProjectDb.deleteProvinceProject(projectName);
+	public static void deleteProvinceProject(String projectName,String cityName,String provinceRfc){
+		ProvinceProjectDb.deleteProvinceProject( projectName, cityName, provinceRfc);
 	}
-//	»ñÈ¡Êý¾Ý¿âÌõÄ¿
+//	ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½Ä¿
 	public static List<ProvinceProject> getAllProvinceProject(){
 		return ProvinceProjectDb.getAllProvinceProject();
 	}
@@ -41,7 +41,7 @@ public class ProvinceProjectOp {
 		return ProvinceProjectDb.getProvinceProjectByRfcCityNameSubject(rfc, cityName, subjectName);
 	}
 	
-//	¸üÐÂÊý¾Ý¿âÌõÄ¿
+//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½Ä¿
 	public static void updateProvinceProject(ProvinceProject project){
 		ProvinceProjectDb.updateProvinceProject(project);
 	}

@@ -113,8 +113,7 @@
 				<td><input type="text" class="provinceRfc txt"></td>
 			</tr>
 			<tr>
-				<td id="text">分配</td>
-				<td><div class="add_assign">+</div></td>
+				<td id="text_d" class="add_assign">分配+</td>
 			</tr>
 			<tr class="item_assign">
 					<td id="text">县：</td>
