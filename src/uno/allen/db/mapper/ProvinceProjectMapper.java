@@ -5,7 +5,7 @@ import uno.allen.entity.ProvinceProject;
 
 public interface ProvinceProjectMapper {
 	void insertProvinceProject(ProvinceProject provinceProject);
-	void deleteProvinceProject(String projectName);
+	void deleteProvinceProject(String projectName,String cityName,String provinceRfc);
 	List<ProvinceProject> getAllProvinceProject();
 	List<ProvinceProject> getProvinceProjectByRfc(String provinceRfc);
 	List<ProvinceProject> getProvinceProjectBySubjectName(String subjectName);

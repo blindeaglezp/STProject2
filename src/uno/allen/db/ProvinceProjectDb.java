@@ -20,11 +20,11 @@ public class ProvinceProjectDb {
 			session.close();
 		}
 	}
-	public static void deleteProvinceProject(String projectName) {
+	public static void deleteProvinceProject(String projectName,String cityName,String provinceRfc) {
 		SqlSession session = DbTools.SQL_SESSION_FACTORY.openSession();
 		try {
 			ProvinceProjectMapper mapper = session.getMapper(ProvinceProjectMapper.class);
-			mapper.deleteProvinceProject(projectName);
+			mapper.deleteProvinceProject( projectName, cityName, provinceRfc);
 			session.commit();
 		} catch (Exception e) {
 			System.out.print(e);
