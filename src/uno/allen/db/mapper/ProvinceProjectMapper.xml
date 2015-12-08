@@ -55,6 +55,6 @@
 	</select>
 	
 	<delete id="deleteProvinceProject" parameterType ="uno.allen.entity.ProvinceProject">
-		delete from province_project where project_name = #{Project_Name}
+		delete from province_project where project_name = #{Project_Name} and city_name_ppfk = #{City_Name_PPFK} and province_rfc_ppfk = #{Province_RFC_PPFK}
 	</delete>
 </mapper>
