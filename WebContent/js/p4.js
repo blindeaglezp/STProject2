@@ -194,7 +194,7 @@ $(document).ready(function() {
 
 //点击添加分配条目按钮，添加分配条目
 $("#addCityProject").find(".add_assign").click(function() {
-	$(".btn_addCityProject").parents("tr").before("<tr><td id='text'>县：</td><td><input type='text' class='county_assign'>" +
+	$(".btn_addCityProject").parents("tr").before("<tr class='item_assign'><td id='text'>县：</td><td><input type='text' class='county_assign'>" +
 		"</td><td id='text'>预算指标：</td><td><input type='text' class='other_budget'></td></tr>");
 });
 
@@ -217,16 +217,16 @@ $(".btn_addProvinceProject").click(function() {
 	var centreBudget = $content.find(".centreBudget").val();
 	var provinceBudget = $content.find(".provinceBudget").val();
 	var cityLocalBudget = $content.find(".cityLocalBudget").val();
-	var $item_assign = $("#addProvinceProject").find(".item_assign");
-	alert($item_assign.eq(i).find(".city_assign").val());
-	var cityAndCounty = new Array();
-	for (var i = 0; i < $item_assign.size(); i++) {
-		cityAndCounty[i] = $item_assign.eq(i).find(".city_assign").val() + ":" + $item_assign.eq(i).find(".county_assign").val() +
-			":" + $item_assign.eq(i).find(".other_budget").val();
-	}
+	var $item_assign = $(".sub_content").find(".item_assign");
+	var cityAndCounty;
+	$item_assign.each(function() {
+		cityAndCounty += this.find(".city_assign").val() + ":" + this.find(".county_assign").val() +
+		":" + this.find(".other_budget").val() + ",";
+	});
+	alert(cityAndCounty);
 	var data = {"cityRfc":cityRfc,"subClass":subClass,"regulation":regulation,"item":item,
 			"projectName":projectName,"totalBudget":totalBudget,"centreBudget":centreBudget,"provinceBudget":provinceBudget,
-			"cityLocalBudget":cityLocalBudget,"cityAndCounty":cityAndCounty.toString()};
+			"cityLocalBudget":cityLocalBudget,"cityAndCounty":cityAndCounty};
 	$.ajax({
 		type:"post",
 		url:"/STProject2/servlet/ProvinceServlet?type=addProvinceProject",
@@ -272,14 +272,16 @@ $("#addCityProject").find(".btn_addCityProject").click(function() {
 	var projectName = $content.find(".projectName").val();
 	var totalBudget = $content.find(".totalBudget").val();
 	var cityLocalBudget = $content.find(".cityLocalBudget").val();
+	var provinceRfc = $content.find(".provinceRfc").val();
 	var $item_assign = $("#addCityProject").find(".item_assign");
 	var cityAndCounty = new Array();
 	for (var i = 0; i < $item_assign.size(); i++) {
 		cityAndCounty[i] = $item_assign.eq(i).find(".county_assign").val() +
 			":" + $item_assign.eq(i).find(".other_budget").val();
 	}
+	alert(cityAndCounty);
 	var data = {"cityRfc":cityRfc,"subClass":subClass,"regulation":regulation,"item":item,
-			"projectName":projectName,"totalBudget":totalBudget,
+			"projectName":projectName,"totalBudget":totalBudget,"provinceRfc":provinceRfc,
 			"cityLocalBudget":cityLocalBudget,"cityAndCounty":cityAndCounty.toString()};
 	$.ajax({
 		type:"post",
