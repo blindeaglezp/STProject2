@@ -145,8 +145,9 @@ public class ProvinceServlet extends HttpServlet {
 		if (!"0".equals(subClass) && "0".equals(subReg)) {
 			subjects = SubjectOp.getSubjectByClass(subClass);
 			for (int i = 0; i < cityProjects.size(); i++) {
-				for (Subject subject : subjects) {
-					if (!subject.getSBJ_Name().equals(cityProjects.get(i).getSubject_Name_CPFK())) {
+				List<Subject> subs = SubjectOp.getSubjectByName(cityProjects.get(i).getSubject_Name_CPFK());
+				for (int j = 0; j < subs.size(); j++) {
+					if (!subClass.equals(subs.get(j).getSBJ_Class())) {
 						cityProjects.remove(i);
 						i--;
 						break;
@@ -156,8 +157,9 @@ public class ProvinceServlet extends HttpServlet {
 		} else if (!"0".equals(subReg) && "0".equals(subItem)) {
 			subjects = SubjectOp.getSubjectByRegulation(subReg);
 			for (int i = 0; i < cityProjects.size(); i++) {
-				for (Subject subject : subjects) {
-					if (!subject.getSBJ_Name().equals(cityProjects.get(i).getSubject_Name_CPFK())) {
+				List<Subject> subs = SubjectOp.getSubjectByName(cityProjects.get(i).getSubject_Name_CPFK());
+				for (int j = 0; j < subs.size(); j++) {
+					if (!subReg.equals(subs.get(j).getSBJ_Regulation())) {
 						cityProjects.remove(i);
 						i--;
 						break;
@@ -167,8 +169,9 @@ public class ProvinceServlet extends HttpServlet {
 		} else if (!"0".equals(subItem)) {
 			subjects = SubjectOp.getSubjectByRegulation(subItem);
 			for (int i = 0; i < cityProjects.size(); i++) {
-				for (Subject subject : subjects) {
-					if (!subject.getSBJ_Name().equals(cityProjects.get(i).getSubject_Name_CPFK())) {
+				List<Subject> subs = SubjectOp.getSubjectByName(cityProjects.get(i).getSubject_Name_CPFK());
+				for (int j = 0; j < subs.size(); j++) {
+					if (!subItem.equals(subs.get(j).getSBJ_Item())) {
 						cityProjects.remove(i);
 						i--;
 						break;
