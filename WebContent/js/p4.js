@@ -208,7 +208,7 @@ $(".projectRight .addProvinceProject").click(function() {
 // 添加省级项目
 $(".btn_addProvinceProject").click(function() {
 	var $content = $("#addProvinceProject .table_province");
-	var cityRfc = $content.find(".cityRfc").val();
+	var provinceRfc = $content.find(".provinceRfc").val();
 	var subClass = $content.find(".class").val();
 	var regulation = $content.find(".regulation").val();
 	var item = $content.find(".item").val();
@@ -217,14 +217,13 @@ $(".btn_addProvinceProject").click(function() {
 	var centreBudget = $content.find(".centreBudget").val();
 	var provinceBudget = $content.find(".provinceBudget").val();
 	var cityLocalBudget = $content.find(".cityLocalBudget").val();
-	var $item_assign = $(".sub_content").find(".item_assign");
+	var $item_assign = $(".sub_content");
 	var cityAndCounty;
 	$item_assign.each(function() {
 		cityAndCounty += this.find(".city_assign").val() + ":" + this.find(".county_assign").val() +
 		":" + this.find(".other_budget").val() + ",";
 	});
-	alert(cityAndCounty);
-	var data = {"cityRfc":cityRfc,"subClass":subClass,"regulation":regulation,"item":item,
+	var data = {"provinceRfc":provinceRfc,"subClass":subClass,"regulation":regulation,"item":item,
 			"projectName":projectName,"totalBudget":totalBudget,"centreBudget":centreBudget,"provinceBudget":provinceBudget,
 			"cityLocalBudget":cityLocalBudget,"cityAndCounty":cityAndCounty};
 	$.ajax({

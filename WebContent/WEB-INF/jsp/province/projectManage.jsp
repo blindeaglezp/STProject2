@@ -116,7 +116,7 @@
 			<table class="table_province">
 				<tr>
 					<td id="text">省文号：</td>
-					<td><input type="text" class="cityRfc txt"></td>
+					<td><input type="text" class="provinceRfc txt"></td>
 					<td id="text">类：</td>
 					<td><input type="text" class="class txt"></td>
 				</tr>
@@ -145,15 +145,11 @@
 			</table>
 			<table class="submit">
 				<tr background="#fff">
-<<<<<<< HEAD
-					<td id="text" class="add_assign">分配+</td> 
-=======
 					<td id="text_s" class="add_assign">分配+</td>
->>>>>>> 52a4e923dc9128f775c70de26a1493909000d4c8
 				</tr>
 				<tr class="sub_content">
 					<td >
-					市：<input type="text" class="city_assign">
+						市：<input type="text" class="city_assign">
 					</td>
 					<td>
 						县：<input type="text" class="county_assign">

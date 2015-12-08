@@ -707,7 +707,7 @@ public class ProvinceServlet extends HttpServlet {
 	 */
 	private void addProvinceProject(HttpServletRequest request, HttpServletResponse response) {
 		// 获取数据
-		String provinceRfc = request.getParameter("cityRfc");
+		String provinceRfc = request.getParameter("provinceRfc");
 		String subClass = request.getParameter("subClass");
 		String regulation = request.getParameter("regulation");
 		String item = request.getParameter("item");
@@ -734,11 +734,7 @@ public class ProvinceServlet extends HttpServlet {
 				provinceProjectObj.setCentre_Budget(centreBudget);
 				provinceProjectObj.setProvince_Budget(provinceBudget);
 				provinceProjectObj.setCity_Local_Budget(cityLocalBudget);
-				if (cs[2] != null && !"".equals(cs[2])) {
-					provinceProjectObj.setCounty_Budget(Integer.parseInt(cs[2]));
-				} else {
-					provinceProjectObj.setCounty_Budget(0);
-				}
+				provinceProjectObj.setCounty_Budget(Integer.parseInt(cs[2]));
 				ProvinceProjectOp.insertProvinceProject(provinceProjectObj);
 			}
 			if ((cs[0] != null && !"".equals(cs[0])) && (cs[1] != null && !"".equals(cs[1]))) {
@@ -747,10 +743,9 @@ public class ProvinceServlet extends HttpServlet {
 				cityProjectObj.setCity_RFC_CPFK(provinceRfc);
 				cityProjectObj.setSubject_Name_CPFK(subjectObj.getSBJ_Name());
 				cityProjectObj.setCounty_name_CPFK(cs[1]);
+				cityProjectObj.setTotal_Budget(totalBudget);
 				cityProjectObj.setProjec_Name(projectName);
-				if (cs[2] != null && !"".equals(cs[2])) {
-					cityProjectObj.setCounty_Budget(Integer.parseInt(cs[2]));
-				}
+				cityProjectObj.setCounty_Budget(Integer.parseInt(cs[2]));
 				CityProjectOp.insertCityProject(cityProjectObj);
 			}
 			
